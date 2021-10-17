@@ -1620,6 +1620,10 @@ Please make sure your boards conform to these design rules.
 <attribute name="NAME" x="-78.613" y="-380.5936" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="-78.5368" y="-385.5974" size="1.27" layer="27"/>
 </element>
+<element name="JP5" library="EE445L" package="1X05" value="" x="-72.1868" y="-387.4516" smashed="yes">
+<attribute name="NAME" x="-78.613" y="-385.6228" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="-78.5368" y="-390.6266" size="1.27" layer="27"/>
+</element>
 </elements>
 <signals>
 <signal name="GND">
@@ -1757,6 +1761,8 @@ Please make sure your boards conform to these design rules.
 <wire x1="59.4868" y1="65.278" x2="62.0278" y2="62.737" width="0.508" layer="16"/>
 <contactref element="J1" pad="10"/>
 <contactref element="J1" pad="5"/>
+<contactref element="JP5" pad="1"/>
+<wire x1="-72.3904" y1="-355.854" x2="-77.2668" y2="-387.4516" width="0" layer="19" extent="1-1"/>
 <wire x1="-72.3904" y1="-355.579" x2="-72.3904" y2="-355.854" width="0" layer="19" extent="16-16"/>
 <wire x1="71.8566" y1="23.7744" x2="-72.3904" y2="-355.579" width="0" layer="19" extent="1-16"/>
 <wire x1="75.3364" y1="33.8328" x2="73.406" y2="23.7744" width="0" layer="19" extent="1-1"/>
@@ -2377,6 +2383,26 @@ Please make sure your boards conform to these design rules.
 <contactref element="U$1" pad="28"/>
 <contactref element="JP4" pad="5"/>
 <wire x1="63.2436" y1="81.2012" x2="-67.1068" y2="-382.4224" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="TDO">
+<contactref element="U$1" pad="49"/>
+<contactref element="JP5" pad="2"/>
+<wire x1="51.7676" y1="83.2012" x2="-74.7268" y2="-387.4516" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="TDI">
+<contactref element="U$1" pad="50"/>
+<contactref element="JP5" pad="3"/>
+<wire x1="51.7676" y1="82.7012" x2="-72.1868" y2="-387.4516" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="TMS">
+<contactref element="U$1" pad="51"/>
+<contactref element="JP5" pad="4"/>
+<wire x1="51.7676" y1="82.2012" x2="-69.6468" y2="-387.4516" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="TCK">
+<contactref element="U$1" pad="52"/>
+<contactref element="JP5" pad="5"/>
+<wire x1="51.7676" y1="81.7012" x2="-67.1068" y2="-387.4516" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>

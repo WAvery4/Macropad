@@ -2586,6 +2586,8 @@ Default shape</description>
 <part name="JP1" library="EE445L" deviceset="PINHD-1X6" device=""/>
 <part name="JP3" library="EE445L" deviceset="PINHD-1X4" device=""/>
 <part name="JP4" library="EE445L" deviceset="PINHD-1X5" device=""/>
+<part name="JP5" library="EE445L" deviceset="PINHD-1X5" device=""/>
+<part name="SUPPLY7" library="EE445L" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -2999,6 +3001,13 @@ measure current</text>
 <attribute name="NAME" x="191.77" y="356.235" size="1.778" layer="95"/>
 <attribute name="VALUE" x="191.77" y="337.82" size="1.778" layer="96"/>
 </instance>
+<instance part="JP5" gate="A" x="58.42" y="401.32" smashed="yes">
+<attribute name="NAME" x="52.07" y="409.575" size="1.778" layer="95"/>
+<attribute name="VALUE" x="52.07" y="391.16" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY7" gate="GND" x="48.26" y="388.62" smashed="yes">
+<attribute name="VALUE" x="41.275" y="389.001" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -3157,6 +3166,12 @@ measure current</text>
 <pinref part="SUPPLY6" gate="GND" pin="GND"/>
 <pinref part="J1" gate="G$1" pin="GND"/>
 <wire x1="398.78" y1="106.68" x2="408.94" y2="106.68" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="JP5" gate="A" pin="1"/>
+<wire x1="55.88" y1="406.4" x2="48.26" y2="406.4" width="0.1524" layer="91"/>
+<pinref part="SUPPLY7" gate="GND" pin="GND"/>
+<wire x1="48.26" y1="391.16" x2="48.26" y2="406.4" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -3914,6 +3929,45 @@ measure current</text>
 <pinref part="U$1" gate="G$6" pin="PF0"/>
 <pinref part="JP4" gate="A" pin="5"/>
 <wire x1="175.26" y1="342.9" x2="195.58" y2="342.9" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="TDO" class="0">
+<segment>
+<pinref part="U$1" gate="G$3" pin="PC3"/>
+<wire x1="38.1" y1="411.48" x2="45.72" y2="411.48" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="411.48" x2="45.72" y2="403.86" width="0.1524" layer="91"/>
+<pinref part="JP5" gate="A" pin="2"/>
+<wire x1="45.72" y1="403.86" x2="55.88" y2="403.86" width="0.1524" layer="91"/>
+<label x="60.96" y="403.86" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="TDI" class="0">
+<segment>
+<pinref part="U$1" gate="G$3" pin="PC2"/>
+<wire x1="38.1" y1="408.94" x2="43.18" y2="408.94" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="408.94" x2="43.18" y2="401.32" width="0.1524" layer="91"/>
+<pinref part="JP5" gate="A" pin="3"/>
+<wire x1="43.18" y1="401.32" x2="55.88" y2="401.32" width="0.1524" layer="91"/>
+<label x="60.96" y="401.32" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="TMS" class="0">
+<segment>
+<pinref part="U$1" gate="G$3" pin="PC1"/>
+<wire x1="38.1" y1="406.4" x2="40.64" y2="406.4" width="0.1524" layer="91"/>
+<pinref part="JP5" gate="A" pin="4"/>
+<wire x1="40.64" y1="406.4" x2="40.64" y2="398.78" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="398.78" x2="55.88" y2="398.78" width="0.1524" layer="91"/>
+<label x="60.96" y="398.78" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="TCK" class="0">
+<segment>
+<pinref part="U$1" gate="G$3" pin="PC0"/>
+<wire x1="38.1" y1="403.86" x2="38.1" y2="396.24" width="0.1524" layer="91"/>
+<pinref part="JP5" gate="A" pin="5"/>
+<wire x1="38.1" y1="396.24" x2="55.88" y2="396.24" width="0.1524" layer="91"/>
+<label x="60.96" y="396.24" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
