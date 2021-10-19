@@ -2440,6 +2440,94 @@ Default shape</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="SamacSys_Parts">
+<description>&lt;b&gt;https://componentsearchengine.com&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by SamacSys&lt;/author&gt;</description>
+<packages>
+<package name="EC11E09244AQ">
+<description>&lt;b&gt;EC11E09244AQ-2&lt;/b&gt;&lt;br&gt;
+</description>
+<pad name="A1" x="0" y="0" drill="1" diameter="1.5"/>
+<pad name="B1" x="5" y="0" drill="1" diameter="1.5"/>
+<pad name="C1" x="2.5" y="0" drill="1" diameter="1.5"/>
+<pad name="D1" x="0" y="14.5" drill="1" diameter="1.5"/>
+<pad name="E1" x="5" y="14.5" drill="1" diameter="1.5"/>
+<pad name="MH1" x="-3" y="7.5" drill="3" diameter="4.5"/>
+<pad name="MH2" x="8" y="7.5" drill="3" diameter="4.5"/>
+<text x="2.5" y="7.25" size="1.27" layer="25" align="center">&gt;NAME</text>
+<text x="2.5" y="7.25" size="1.27" layer="27" align="center">&gt;VALUE</text>
+<wire x1="-3.35" y1="13.5" x2="8.35" y2="13.5" width="0.1" layer="51"/>
+<wire x1="8.35" y1="13.5" x2="8.35" y2="1.5" width="0.1" layer="51"/>
+<wire x1="8.35" y1="1.5" x2="-3.35" y2="1.5" width="0.1" layer="51"/>
+<wire x1="-3.35" y1="1.5" x2="-3.35" y2="13.5" width="0.1" layer="51"/>
+<wire x1="-6.25" y1="16.25" x2="11.25" y2="16.25" width="0.1" layer="51"/>
+<wire x1="11.25" y1="16.25" x2="11.25" y2="-1.75" width="0.1" layer="51"/>
+<wire x1="11.25" y1="-1.75" x2="-6.25" y2="-1.75" width="0.1" layer="51"/>
+<wire x1="-6.25" y1="-1.75" x2="-6.25" y2="16.25" width="0.1" layer="51"/>
+<wire x1="-3.35" y1="4.5" x2="-3.35" y2="1.5" width="0.2" layer="21"/>
+<wire x1="-3.35" y1="1.5" x2="8.35" y2="1.5" width="0.2" layer="21"/>
+<wire x1="8.35" y1="1.5" x2="8.35" y2="4.5" width="0.2" layer="21"/>
+<wire x1="-2.5" y1="0" x2="-2.5" y2="0" width="0.2" layer="21"/>
+<wire x1="-2.5" y1="0" x2="-2.3" y2="0" width="0.2" layer="21" curve="180"/>
+<wire x1="-2.3" y1="0" x2="-2.3" y2="0" width="0.2" layer="21"/>
+<wire x1="-2.3" y1="0" x2="-2.5" y2="0" width="0.2" layer="21" curve="180"/>
+<wire x1="-3.35" y1="10.5" x2="-3.35" y2="13.5" width="0.2" layer="21"/>
+<wire x1="-3.35" y1="13.5" x2="-0.5" y2="13.5" width="0.2" layer="21"/>
+<wire x1="8.35" y1="10.5" x2="8.35" y2="13.5" width="0.2" layer="21"/>
+<wire x1="8.35" y1="13.5" x2="5.5" y2="13.5" width="0.2" layer="21"/>
+<wire x1="0.5" y1="13.5" x2="4.5" y2="13.5" width="0.2" layer="21"/>
+</package>
+</packages>
+<symbols>
+<symbol name="EC11E09244AQ">
+<wire x1="5.08" y1="10.16" x2="20.32" y2="10.16" width="0.254" layer="94"/>
+<wire x1="20.32" y1="-12.7" x2="20.32" y2="10.16" width="0.254" layer="94"/>
+<wire x1="20.32" y1="-12.7" x2="5.08" y2="-12.7" width="0.254" layer="94"/>
+<wire x1="5.08" y1="10.16" x2="5.08" y2="-12.7" width="0.254" layer="94"/>
+<text x="21.59" y="15.24" size="1.778" layer="95" align="center-left">&gt;NAME</text>
+<text x="21.59" y="12.7" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
+<pin name="CW" x="10.16" y="-17.78" length="middle" rot="R90"/>
+<pin name="CCW" x="15.24" y="-17.78" length="middle" rot="R90"/>
+<pin name="WIPER" x="12.7" y="-17.78" length="middle" rot="R90"/>
+<pin name="COM" x="10.16" y="15.24" length="middle" rot="R270"/>
+<pin name="NO" x="12.7" y="15.24" length="middle" rot="R270"/>
+<pin name="MH1" x="0" y="0" length="middle"/>
+<pin name="MH2" x="25.4" y="0" length="middle" rot="R180"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="EC11E09244AQ" prefix="U">
+<description>&lt;b&gt;Encoders 11mm 9 res 18 detent w/ switch lo profile&lt;/b&gt;&lt;p&gt;
+Source: &lt;a href="https://componentsearchengine.com/Datasheets/2/EC11E09244AQ.pdf"&gt; Datasheet &lt;/a&gt;</description>
+<gates>
+<gate name="G$1" symbol="EC11E09244AQ" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="EC11E09244AQ">
+<connects>
+<connect gate="G$1" pin="CCW" pad="B1"/>
+<connect gate="G$1" pin="COM" pad="D1"/>
+<connect gate="G$1" pin="CW" pad="A1"/>
+<connect gate="G$1" pin="MH1" pad="MH1"/>
+<connect gate="G$1" pin="MH2" pad="MH2"/>
+<connect gate="G$1" pin="NO" pad="E1"/>
+<connect gate="G$1" pin="WIPER" pad="C1"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="DESCRIPTION" value="Encoders 11mm 9 res 18 detent w/ switch lo profile" constant="no"/>
+<attribute name="HEIGHT" value="24.5mm" constant="no"/>
+<attribute name="MANUFACTURER_NAME" value="Alps Alpine" constant="no"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="EC11E09244AQ" constant="no"/>
+<attribute name="MOUSER_PART_NUMBER" value="688-EC11E09244AQ" constant="no"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Alps-Alpine/EC11E09244AQ?qs=fMKjfF2mFohVUA4%2Ftyw7NQ%3D%3D" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -2553,8 +2641,11 @@ Default shape</description>
 <part name="JP1" library="EE445L" deviceset="PINHD-1X6" device=""/>
 <part name="JP3" library="EE445L" deviceset="PINHD-1X4" device=""/>
 <part name="JP4" library="EE445L" deviceset="PINHD-1X5" device=""/>
-<part name="JP5" library="EE445L" deviceset="PINHD-1X5" device=""/>
+<part name="JTAG" library="EE445L" deviceset="PINHD-1X5" device=""/>
 <part name="SUPPLY7" library="EE445L" deviceset="GND" device=""/>
+<part name="U1" library="SamacSys_Parts" deviceset="EC11E09244AQ" device=""/>
+<part name="SUPPLY8" library="EE445L" deviceset="GND" device=""/>
+<part name="SUPPLY9" library="EE445L" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -2951,17 +3042,27 @@ measure current</text>
 <attribute name="NAME" x="163.83" y="409.575" size="1.778" layer="95"/>
 <attribute name="VALUE" x="163.83" y="393.7" size="1.778" layer="96"/>
 </instance>
-<instance part="U$1" gate="G$6" x="157.48" y="340.36" smashed="yes"/>
-<instance part="JP4" gate="A" x="198.12" y="347.98" smashed="yes">
-<attribute name="NAME" x="191.77" y="356.235" size="1.778" layer="95"/>
-<attribute name="VALUE" x="191.77" y="337.82" size="1.778" layer="96"/>
+<instance part="U$1" gate="G$6" x="396.24" y="60.96" smashed="yes"/>
+<instance part="JP4" gate="A" x="436.88" y="68.58" smashed="yes">
+<attribute name="NAME" x="430.53" y="76.835" size="1.778" layer="95"/>
+<attribute name="VALUE" x="430.53" y="58.42" size="1.778" layer="96"/>
 </instance>
-<instance part="JP5" gate="A" x="58.42" y="401.32" smashed="yes">
+<instance part="JTAG" gate="A" x="58.42" y="401.32" smashed="yes">
 <attribute name="NAME" x="52.07" y="409.575" size="1.778" layer="95"/>
 <attribute name="VALUE" x="52.07" y="391.16" size="1.778" layer="96"/>
 </instance>
 <instance part="SUPPLY7" gate="GND" x="48.26" y="388.62" smashed="yes">
 <attribute name="VALUE" x="41.275" y="389.001" size="1.778" layer="96"/>
+</instance>
+<instance part="U1" gate="G$1" x="337.82" y="58.42" smashed="yes">
+<attribute name="NAME" x="359.41" y="73.66" size="1.778" layer="95" align="center-left"/>
+<attribute name="VALUE" x="359.41" y="71.12" size="1.778" layer="96" align="center-left"/>
+</instance>
+<instance part="SUPPLY8" gate="GND" x="350.52" y="27.94" smashed="yes">
+<attribute name="VALUE" x="346.075" y="23.241" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY9" gate="GND" x="350.52" y="81.28" smashed="yes" rot="R180">
+<attribute name="VALUE" x="354.965" y="85.979" size="1.778" layer="96" rot="R180"/>
 </instance>
 </instances>
 <busses>
@@ -3112,13 +3213,28 @@ measure current</text>
 <segment>
 <pinref part="SUPPLY6" gate="GND" pin="GND"/>
 <pinref part="J1" gate="G$1" pin="GND"/>
-<wire x1="398.78" y1="106.68" x2="408.94" y2="106.68" width="0.1524" layer="91"/>
+<wire x1="398.78" y1="106.68" x2="403.86" y2="106.68" width="0.1524" layer="91"/>
+<wire x1="403.86" y1="106.68" x2="408.94" y2="106.68" width="0.1524" layer="91"/>
+<wire x1="403.86" y1="106.68" x2="403.86" y2="101.6" width="0.1524" layer="91"/>
+<junction x="403.86" y="106.68"/>
+<pinref part="J1" gate="G$1" pin="SHIELD"/>
+<wire x1="403.86" y1="101.6" x2="408.94" y2="101.6" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="JP5" gate="A" pin="1"/>
+<pinref part="JTAG" gate="A" pin="1"/>
 <wire x1="55.88" y1="406.4" x2="48.26" y2="406.4" width="0.1524" layer="91"/>
 <pinref part="SUPPLY7" gate="GND" pin="GND"/>
 <wire x1="48.26" y1="391.16" x2="48.26" y2="406.4" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="WIPER"/>
+<pinref part="SUPPLY8" gate="GND" pin="GND"/>
+<wire x1="350.52" y1="30.48" x2="350.52" y2="40.64" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="NO"/>
+<pinref part="SUPPLY9" gate="GND" pin="GND"/>
+<wire x1="350.52" y1="73.66" x2="350.52" y2="78.74" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -3840,35 +3956,50 @@ measure current</text>
 <segment>
 <pinref part="U$1" gate="G$6" pin="PF4"/>
 <pinref part="JP4" gate="A" pin="1"/>
-<wire x1="175.26" y1="353.06" x2="195.58" y2="353.06" width="0.1524" layer="91"/>
+<wire x1="414.02" y1="73.66" x2="434.34" y2="73.66" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="PF3" class="0">
 <segment>
 <pinref part="U$1" gate="G$6" pin="PF3"/>
 <pinref part="JP4" gate="A" pin="2"/>
-<wire x1="175.26" y1="350.52" x2="195.58" y2="350.52" width="0.1524" layer="91"/>
+<wire x1="414.02" y1="71.12" x2="434.34" y2="71.12" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="PF2" class="0">
 <segment>
 <pinref part="U$1" gate="G$6" pin="PF2"/>
 <pinref part="JP4" gate="A" pin="3"/>
-<wire x1="175.26" y1="347.98" x2="195.58" y2="347.98" width="0.1524" layer="91"/>
+<wire x1="414.02" y1="68.58" x2="434.34" y2="68.58" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="COM"/>
+<wire x1="347.98" y1="73.66" x2="347.98" y2="78.74" width="0.1524" layer="91"/>
+<label x="342.9" y="78.74" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="PF1" class="0">
 <segment>
 <pinref part="U$1" gate="G$6" pin="PF1"/>
 <pinref part="JP4" gate="A" pin="4"/>
-<wire x1="175.26" y1="345.44" x2="195.58" y2="345.44" width="0.1524" layer="91"/>
+<wire x1="414.02" y1="66.04" x2="434.34" y2="66.04" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="CCW"/>
+<wire x1="353.06" y1="40.64" x2="353.06" y2="38.1" width="0.1524" layer="91"/>
+<label x="353.06" y="35.56" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="PF0" class="0">
 <segment>
 <pinref part="U$1" gate="G$6" pin="PF0"/>
 <pinref part="JP4" gate="A" pin="5"/>
-<wire x1="175.26" y1="342.9" x2="195.58" y2="342.9" width="0.1524" layer="91"/>
+<wire x1="414.02" y1="63.5" x2="434.34" y2="63.5" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="CW"/>
+<wire x1="347.98" y1="40.64" x2="347.98" y2="38.1" width="0.1524" layer="91"/>
+<label x="345.44" y="35.56" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="TDO" class="0">
@@ -3876,7 +4007,7 @@ measure current</text>
 <pinref part="U$1" gate="G$3" pin="PC3"/>
 <wire x1="38.1" y1="411.48" x2="45.72" y2="411.48" width="0.1524" layer="91"/>
 <wire x1="45.72" y1="411.48" x2="45.72" y2="403.86" width="0.1524" layer="91"/>
-<pinref part="JP5" gate="A" pin="2"/>
+<pinref part="JTAG" gate="A" pin="2"/>
 <wire x1="45.72" y1="403.86" x2="55.88" y2="403.86" width="0.1524" layer="91"/>
 <label x="60.96" y="403.86" size="1.778" layer="95"/>
 </segment>
@@ -3886,7 +4017,7 @@ measure current</text>
 <pinref part="U$1" gate="G$3" pin="PC2"/>
 <wire x1="38.1" y1="408.94" x2="43.18" y2="408.94" width="0.1524" layer="91"/>
 <wire x1="43.18" y1="408.94" x2="43.18" y2="401.32" width="0.1524" layer="91"/>
-<pinref part="JP5" gate="A" pin="3"/>
+<pinref part="JTAG" gate="A" pin="3"/>
 <wire x1="43.18" y1="401.32" x2="55.88" y2="401.32" width="0.1524" layer="91"/>
 <label x="60.96" y="401.32" size="1.778" layer="95"/>
 </segment>
@@ -3895,7 +4026,7 @@ measure current</text>
 <segment>
 <pinref part="U$1" gate="G$3" pin="PC1"/>
 <wire x1="38.1" y1="406.4" x2="40.64" y2="406.4" width="0.1524" layer="91"/>
-<pinref part="JP5" gate="A" pin="4"/>
+<pinref part="JTAG" gate="A" pin="4"/>
 <wire x1="40.64" y1="406.4" x2="40.64" y2="398.78" width="0.1524" layer="91"/>
 <wire x1="40.64" y1="398.78" x2="55.88" y2="398.78" width="0.1524" layer="91"/>
 <label x="60.96" y="398.78" size="1.778" layer="95"/>
@@ -3905,7 +4036,7 @@ measure current</text>
 <segment>
 <pinref part="U$1" gate="G$3" pin="PC0"/>
 <wire x1="38.1" y1="403.86" x2="38.1" y2="396.24" width="0.1524" layer="91"/>
-<pinref part="JP5" gate="A" pin="5"/>
+<pinref part="JTAG" gate="A" pin="5"/>
 <wire x1="38.1" y1="396.24" x2="55.88" y2="396.24" width="0.1524" layer="91"/>
 <label x="60.96" y="396.24" size="1.778" layer="95"/>
 </segment>
