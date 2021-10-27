@@ -2257,6 +2257,74 @@ Source: &lt;a href="http://www.hirose.co.jp/cataloge_hp/ed_ZX_20140804.pdf"&gt;h
 </deviceset>
 </devicesets>
 </library>
+<library name="TPD2E001DRLR">
+<packages>
+<package name="SOT50P160X60-5N">
+<text x="-1.35" y="1.1" size="0.8128" layer="25" ratio="10" rot="SR0">&gt;NAME</text>
+<text x="-1.35" y="-1.9" size="0.8128" layer="27" ratio="10" rot="SR0">&gt;VALUE</text>
+<wire x1="-0.6" y1="0.8" x2="0.6" y2="0.8" width="0.127" layer="51"/>
+<wire x1="0.6" y1="0.8" x2="0.6" y2="-0.8" width="0.127" layer="51"/>
+<wire x1="0.6" y1="-0.8" x2="-0.6" y2="-0.8" width="0.127" layer="51"/>
+<wire x1="-0.6" y1="-0.8" x2="-0.6" y2="0.8" width="0.127" layer="51"/>
+<wire x1="0.6" y1="-0.97" x2="-0.6" y2="-0.97" width="0.127" layer="21"/>
+<wire x1="-0.6" y1="0.97" x2="0.6" y2="0.97" width="0.127" layer="21"/>
+<wire x1="-1.315" y1="1.05" x2="1.315" y2="1.05" width="0.05" layer="39"/>
+<wire x1="1.315" y1="1.05" x2="1.315" y2="-1.05" width="0.05" layer="39"/>
+<wire x1="1.315" y1="-1.05" x2="-1.315" y2="-1.05" width="0.05" layer="39"/>
+<wire x1="-1.315" y1="-1.05" x2="-1.315" y2="1.05" width="0.05" layer="39"/>
+<circle x="-1.7" y="0.75" radius="0.1" width="0.2" layer="51"/>
+<circle x="-1.7" y="0.75" radius="0.1" width="0.2" layer="21"/>
+<smd name="1" x="-0.735" y="0.5" dx="0.66" dy="0.3" layer="1" roundness="25"/>
+<smd name="2" x="-0.735" y="0" dx="0.66" dy="0.3" layer="1" roundness="25"/>
+<smd name="3" x="-0.735" y="-0.5" dx="0.66" dy="0.3" layer="1" roundness="25"/>
+<smd name="4" x="0.735" y="-0.5" dx="0.66" dy="0.3" layer="1" roundness="25"/>
+<smd name="5" x="0.735" y="0.5" dx="0.66" dy="0.3" layer="1" roundness="25"/>
+</package>
+</packages>
+<symbols>
+<symbol name="TPD2E001DRLR">
+<wire x1="-12.7" y1="10.16" x2="12.7" y2="10.16" width="0.41" layer="94"/>
+<wire x1="12.7" y1="10.16" x2="12.7" y2="-10.16" width="0.41" layer="94"/>
+<wire x1="12.7" y1="-10.16" x2="-12.7" y2="-10.16" width="0.41" layer="94"/>
+<wire x1="-12.7" y1="-10.16" x2="-12.7" y2="10.16" width="0.41" layer="94"/>
+<text x="-12.7" y="11.16" size="2.0828" layer="95" ratio="10" rot="SR0">&gt;NAME</text>
+<text x="-12.7" y="-14.16" size="2.0828" layer="96" ratio="10" rot="SR0">&gt;VALUE</text>
+<pin name="IO1" x="-17.78" y="2.54" length="middle"/>
+<pin name="IO2" x="-17.78" y="0" length="middle"/>
+<pin name="VCC" x="17.78" y="7.62" length="middle" direction="pwr" rot="R180"/>
+<pin name="GND" x="17.78" y="-5.08" length="middle" direction="pwr" rot="R180"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="TPD2E001DRLR" prefix="U">
+<description> &lt;a href="https://pricing.snapeda.com/parts/TPD2E001DRLR/Texas%20Instruments/view-part?ref=eda"&gt;Check prices&lt;/a&gt;</description>
+<gates>
+<gate name="G$1" symbol="TPD2E001DRLR" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="SOT50P160X60-5N">
+<connects>
+<connect gate="G$1" pin="GND" pad="4"/>
+<connect gate="G$1" pin="IO1" pad="3"/>
+<connect gate="G$1" pin="IO2" pad="5"/>
+<connect gate="G$1" pin="VCC" pad="1"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="AVAILABILITY" value="In Stock"/>
+<attribute name="DESCRIPTION" value=" Low-capacitance 2-channel +/-15k-V ESD protection array for high-speed data interfaces 5-SOT-5X3 -40 to 85 "/>
+<attribute name="MF" value="Texas Instruments"/>
+<attribute name="MP" value="TPD2E001DRLR"/>
+<attribute name="PACKAGE" value="SOT-5X3-5 Texas Instruments"/>
+<attribute name="PRICE" value="None"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/TPD2E001DRLR/?ref=eda"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -2267,11 +2335,11 @@ Source: &lt;a href="http://www.hirose.co.jp/cataloge_hp/ed_ZX_20140804.pdf"&gt;h
 </class>
 </classes>
 <parts>
-<part name="C1" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="0.01uf"/>
-<part name="C2" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="0.1uf"/>
-<part name="C3" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="0.01uf"/>
-<part name="C4" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="0.1uf"/>
-<part name="C5" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="0.01uf"/>
+<part name="C1" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="10uF"/>
+<part name="C2" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="0.1uF"/>
+<part name="C3" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="0.1uF"/>
+<part name="C4" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="0.1uF"/>
+<part name="C5" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="0.1uF"/>
 <part name="U$1" library="EE445L" deviceset="TM4C123GH6PM" device=""/>
 <part name="+3V1" library="EE445L" deviceset="+3V3" device=""/>
 <part name="SUPPLY1" library="EE445L" deviceset="GND" device=""/>
@@ -2280,7 +2348,7 @@ Source: &lt;a href="http://www.hirose.co.jp/cataloge_hp/ed_ZX_20140804.pdf"&gt;h
 <part name="C6" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="1.0uf"/>
 <part name="C7" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="0.1uf"/>
 <part name="C8" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="0.1uf"/>
-<part name="C9" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="0.1uf"/>
+<part name="C9" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="1.0uf"/>
 <part name="C10" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="2.2uf"/>
 <part name="SUPPLY3" library="EE445L" deviceset="GND" device=""/>
 <part name="C12" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="10pf"/>
@@ -2367,6 +2435,13 @@ Source: &lt;a href="http://www.hirose.co.jp/cataloge_hp/ed_ZX_20140804.pdf"&gt;h
 <part name="X1" library="zx62d-b-5pa8-oshpark_10" deviceset="ZX62D-B-5PA8" device=""/>
 <part name="P+1" library="EE445L" deviceset="+5V" device=""/>
 <part name="SUPPLY6" library="EE445L" deviceset="GND" device=""/>
+<part name="U2" library="TPD2E001DRLR" deviceset="TPD2E001DRLR" device=""/>
+<part name="C13" library="EE445L" deviceset="CAPACITOR" device="025-024X044" value="0.1uf"/>
+<part name="SUPPLY10" library="EE445L" deviceset="GND" device=""/>
+<part name="P+3" library="EE445L" deviceset="+5V" device=""/>
+<part name="P+4" library="EE445L" deviceset="+5V" device=""/>
+<part name="SUPPLY12" library="EE445L" deviceset="GND" device=""/>
+<part name="JP1" library="EE445L" deviceset="PINHD-1X4" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -2757,6 +2832,30 @@ Source: &lt;a href="http://www.hirose.co.jp/cataloge_hp/ed_ZX_20140804.pdf"&gt;h
 <instance part="SUPPLY6" gate="GND" x="457.2" y="68.58" smashed="yes" rot="R270">
 <attribute name="VALUE" x="452.501" y="73.025" size="1.778" layer="96" rot="R270"/>
 </instance>
+<instance part="U2" gate="G$1" x="523.24" y="73.66" smashed="yes">
+<attribute name="NAME" x="510.54" y="84.82" size="2.0828" layer="95" ratio="10" rot="SR0"/>
+<attribute name="VALUE" x="510.54" y="59.5" size="2.0828" layer="96" ratio="10" rot="SR0"/>
+</instance>
+<instance part="C13" gate="G$1" x="544.83" y="77.47" smashed="yes">
+<attribute name="NAME" x="545.846" y="78.105" size="1.778" layer="95"/>
+<attribute name="VALUE" x="545.846" y="73.279" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY10" gate="GND" x="543.56" y="66.04" smashed="yes">
+<attribute name="VALUE" x="539.115" y="61.341" size="1.778" layer="96"/>
+</instance>
+<instance part="P+3" gate="1" x="543.56" y="83.82" smashed="yes">
+<attribute name="VALUE" x="541.02" y="78.74" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="P+4" gate="1" x="467.36" y="119.38" smashed="yes">
+<attribute name="VALUE" x="464.82" y="114.3" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="SUPPLY12" gate="GND" x="467.36" y="91.44" smashed="yes">
+<attribute name="VALUE" x="462.915" y="86.741" size="1.778" layer="96"/>
+</instance>
+<instance part="JP1" gate="A" x="480.06" y="104.14" smashed="yes">
+<attribute name="NAME" x="473.71" y="112.395" size="1.778" layer="95"/>
+<attribute name="VALUE" x="473.71" y="96.52" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -2916,6 +3015,21 @@ Source: &lt;a href="http://www.hirose.co.jp/cataloge_hp/ed_ZX_20140804.pdf"&gt;h
 <wire x1="469.9" y1="68.58" x2="459.74" y2="68.58" width="0.1524" layer="91"/>
 <pinref part="SUPPLY6" gate="GND" pin="GND"/>
 </segment>
+<segment>
+<pinref part="C13" gate="G$1" pin="2"/>
+<pinref part="U2" gate="G$1" pin="GND"/>
+<wire x1="544.83" y1="72.39" x2="544.83" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="544.83" y1="68.58" x2="543.56" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="SUPPLY10" gate="GND" pin="GND"/>
+<wire x1="543.56" y1="68.58" x2="541.02" y2="68.58" width="0.1524" layer="91"/>
+<junction x="543.56" y="68.58"/>
+</segment>
+<segment>
+<wire x1="477.52" y1="101.6" x2="467.36" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="467.36" y1="101.6" x2="467.36" y2="93.98" width="0.1524" layer="91"/>
+<pinref part="SUPPLY12" gate="GND" pin="GND"/>
+<pinref part="JP1" gate="A" pin="4"/>
+</segment>
 </net>
 <net name="+3V3" class="0">
 <segment>
@@ -3049,6 +3163,21 @@ Source: &lt;a href="http://www.hirose.co.jp/cataloge_hp/ed_ZX_20140804.pdf"&gt;h
 <pinref part="X1" gate="G$1" pin="1"/>
 <wire x1="469.9" y1="78.74" x2="459.74" y2="78.74" width="0.1524" layer="91"/>
 <pinref part="P+1" gate="1" pin="+5V"/>
+</segment>
+<segment>
+<pinref part="C13" gate="G$1" pin="1"/>
+<pinref part="U2" gate="G$1" pin="VCC"/>
+<wire x1="544.83" y1="80.01" x2="544.83" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="544.83" y1="81.28" x2="543.56" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="P+3" gate="1" pin="+5V"/>
+<wire x1="543.56" y1="81.28" x2="541.02" y2="81.28" width="0.1524" layer="91"/>
+<junction x="543.56" y="81.28"/>
+</segment>
+<segment>
+<wire x1="477.52" y1="109.22" x2="467.36" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="467.36" y1="109.22" x2="467.36" y2="116.84" width="0.1524" layer="91"/>
+<pinref part="P+4" gate="1" pin="+5V"/>
+<pinref part="JP1" gate="A" pin="1"/>
 </segment>
 </net>
 <net name="RESET" class="0">
@@ -3549,6 +3678,16 @@ Source: &lt;a href="http://www.hirose.co.jp/cataloge_hp/ed_ZX_20140804.pdf"&gt;h
 <wire x1="469.9" y1="73.66" x2="464.82" y2="73.66" width="0.1524" layer="91"/>
 <label x="462.28" y="73.66" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="U2" gate="G$1" pin="IO1"/>
+<wire x1="505.46" y1="76.2" x2="500.38" y2="76.2" width="0.1524" layer="91"/>
+<label x="500.38" y="76.2" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="477.52" y1="106.68" x2="467.36" y2="106.68" width="0.1524" layer="91"/>
+<label x="464.82" y="106.68" size="1.778" layer="95"/>
+<pinref part="JP1" gate="A" pin="2"/>
+</segment>
 </net>
 <net name="D-" class="0">
 <segment>
@@ -3560,6 +3699,16 @@ Source: &lt;a href="http://www.hirose.co.jp/cataloge_hp/ed_ZX_20140804.pdf"&gt;h
 <pinref part="X1" gate="G$1" pin="2"/>
 <wire x1="469.9" y1="76.2" x2="464.82" y2="76.2" width="0.1524" layer="91"/>
 <label x="462.28" y="76.2" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U2" gate="G$1" pin="IO2"/>
+<wire x1="505.46" y1="73.66" x2="500.38" y2="73.66" width="0.1524" layer="91"/>
+<label x="500.38" y="73.66" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="477.52" y1="104.14" x2="467.36" y2="104.14" width="0.1524" layer="91"/>
+<label x="464.82" y="104.14" size="1.778" layer="95"/>
+<pinref part="JP1" gate="A" pin="3"/>
 </segment>
 </net>
 <net name="ST7735_CARD_CS" class="0">
