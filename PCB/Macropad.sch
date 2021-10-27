@@ -2550,7 +2550,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/SRV05-4.TCT.p
 <instance part="SUPPLY11" gate="GND" x="83.82" y="149.86" smashed="yes">
 <attribute name="VALUE" x="79.375" y="145.161" size="1.778" layer="96"/>
 </instance>
-<instance part="FRAME3" gate="G$1" x="289.56" y="226.06" smashed="yes"/>
 <instance part="FRAME3" gate="G$2" x="462.28" y="228.6" smashed="yes">
 <attribute name="LAST_DATE_TIME" x="474.98" y="229.87" size="2.54" layer="94"/>
 <attribute name="SHEET" x="548.64" y="229.87" size="2.54" layer="94"/>
@@ -2835,11 +2834,11 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/SRV05-4.TCT.p
 <instance part="X1" gate="S" x="480.06" y="63.5" smashed="yes">
 <attribute name="NAME" x="482.6" y="60.96" size="1.778" layer="95" font="vector"/>
 </instance>
-<instance part="P+1" gate="1" x="457.2" y="78.74" smashed="yes" rot="R90">
-<attribute name="VALUE" x="457.2" y="78.74" size="1.778" layer="96" rot="R180"/>
+<instance part="P+1" gate="1" x="457.2" y="81.28" smashed="yes">
+<attribute name="VALUE" x="457.2" y="83.82" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="SUPPLY6" gate="GND" x="457.2" y="68.58" smashed="yes" rot="R270">
-<attribute name="VALUE" x="452.501" y="73.025" size="1.778" layer="96" rot="R270"/>
+<instance part="SUPPLY6" gate="GND" x="457.2" y="66.04" smashed="yes">
+<attribute name="VALUE" x="452.755" y="61.341" size="1.778" layer="96"/>
 </instance>
 <instance part="SUPPLY10" gate="GND" x="528.32" y="81.28" smashed="yes">
 <attribute name="VALUE" x="523.875" y="76.581" size="1.778" layer="96"/>
@@ -3017,8 +3016,13 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/SRV05-4.TCT.p
 </segment>
 <segment>
 <pinref part="X1" gate="G$1" pin="5"/>
-<wire x1="469.9" y1="68.58" x2="459.74" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="469.9" y1="68.58" x2="464.82" y2="68.58" width="0.1524" layer="91"/>
 <pinref part="SUPPLY6" gate="GND" pin="GND"/>
+<pinref part="X1" gate="G$1" pin="4"/>
+<wire x1="464.82" y1="68.58" x2="457.2" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="469.9" y1="71.12" x2="464.82" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="464.82" y1="71.12" x2="464.82" y2="68.58" width="0.1524" layer="91"/>
+<junction x="464.82" y="68.58"/>
 </segment>
 <segment>
 <wire x1="477.52" y1="101.6" x2="467.36" y2="101.6" width="0.1524" layer="91"/>
@@ -3174,7 +3178,7 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/SRV05-4.TCT.p
 </segment>
 <segment>
 <pinref part="X1" gate="G$1" pin="1"/>
-<wire x1="469.9" y1="78.74" x2="459.74" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="469.9" y1="78.74" x2="457.2" y2="78.74" width="0.1524" layer="91"/>
 <pinref part="P+1" gate="1" pin="+5V"/>
 </segment>
 <segment>
