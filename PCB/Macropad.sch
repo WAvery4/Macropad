@@ -2451,6 +2451,7 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/SRV05-4.TCT.p
 <part name="SUPPLY12" library="EE445L" deviceset="GND" device=""/>
 <part name="JP1" library="EE445L" deviceset="PINHD-1X4" device=""/>
 <part name="D3" library="SRV05-4.TCT" deviceset="SRV05-4.TCT" device=""/>
+<part name="SUPPLY15" library="EE445L" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -2860,6 +2861,9 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/SRV05-4.TCT.p
 <attribute name="NAME" x="509.27" y="99.06" size="1.778" layer="95" align="center-left"/>
 <attribute name="VALUE" x="509.27" y="101.6" size="1.778" layer="96" align="center-left"/>
 </instance>
+<instance part="SUPPLY15" gate="GND" x="474.98" y="53.34" smashed="yes">
+<attribute name="VALUE" x="470.535" y="48.641" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -3046,6 +3050,22 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/SRV05-4.TCT.p
 <wire x1="533.4" y1="96.52" x2="538.48" y2="96.52" width="0.1524" layer="91"/>
 <wire x1="538.48" y1="96.52" x2="538.48" y2="99.06" width="0.1524" layer="91"/>
 <junction x="538.48" y="99.06"/>
+</segment>
+<segment>
+<pinref part="X1" gate="S" pin="S1"/>
+<wire x1="472.44" y1="60.96" x2="472.44" y2="55.88" width="0.1524" layer="91"/>
+<pinref part="SUPPLY15" gate="GND" pin="GND"/>
+<wire x1="472.44" y1="55.88" x2="474.98" y2="55.88" width="0.1524" layer="91"/>
+<pinref part="X1" gate="S" pin="S2"/>
+<wire x1="474.98" y1="60.96" x2="474.98" y2="55.88" width="0.1524" layer="91"/>
+<junction x="474.98" y="55.88"/>
+<pinref part="X1" gate="S" pin="S3"/>
+<wire x1="474.98" y1="55.88" x2="477.52" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="477.52" y1="55.88" x2="477.52" y2="60.96" width="0.1524" layer="91"/>
+<pinref part="X1" gate="S" pin="S4"/>
+<wire x1="477.52" y1="55.88" x2="480.06" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="480.06" y1="55.88" x2="480.06" y2="60.96" width="0.1524" layer="91"/>
+<junction x="477.52" y="55.88"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -3698,9 +3718,9 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/SRV05-4.TCT.p
 <pinref part="D3" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<wire x1="477.52" y1="106.68" x2="467.36" y2="106.68" width="0.1524" layer="91"/>
-<label x="464.82" y="106.68" size="1.778" layer="95"/>
-<pinref part="JP1" gate="A" pin="2"/>
+<wire x1="477.52" y1="104.14" x2="467.36" y2="104.14" width="0.1524" layer="91"/>
+<label x="464.82" y="104.14" size="1.778" layer="95"/>
+<pinref part="JP1" gate="A" pin="3"/>
 </segment>
 </net>
 <net name="D-" class="0">
@@ -3715,14 +3735,14 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/SRV05-4.TCT.p
 <label x="462.28" y="76.2" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="477.52" y1="104.14" x2="467.36" y2="104.14" width="0.1524" layer="91"/>
-<label x="464.82" y="104.14" size="1.778" layer="95"/>
-<pinref part="JP1" gate="A" pin="3"/>
-</segment>
-<segment>
 <pinref part="D3" gate="G$1" pin="6"/>
 <wire x1="533.4" y1="93.98" x2="538.48" y2="93.98" width="0.1524" layer="91"/>
 <label x="538.48" y="93.98" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="477.52" y1="106.68" x2="467.36" y2="106.68" width="0.1524" layer="91"/>
+<label x="464.82" y="106.68" size="1.778" layer="95"/>
+<pinref part="JP1" gate="A" pin="2"/>
 </segment>
 </net>
 <net name="ST7735_CARD_CS" class="0">
