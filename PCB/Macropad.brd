@@ -193,10 +193,10 @@
 <hole x="124.46" y="2.54" drill="1.905"/>
 <hole x="2.54" y="2.54" drill="1.905"/>
 <hole x="2.54" y="130.81" drill="1.905"/>
-<text x="51.7652" y="109.6772" size="1.778" layer="21" rot="R90">EE445L Final Project
+<text x="50.8508" y="111.8616" size="1.4224" layer="21" rot="R90">EE445L Macropad
 WA, AC, JG, NC
 TA: MY
-Macropad</text>
+PCB #: UTX-2021F003</text>
 </plain>
 <libraries>
 <library name="EE445L">
@@ -1286,7 +1286,7 @@ Please make sure your boards conform to these design rules.
 <element name="S7" library="cherry" package="CHERRY_MX" value="CHERRY_MX" x="53.34" y="99.06" smashed="yes">
 <attribute name="FARNELL" value="2292961" x="5.334" y="141.8844" size="1.778" layer="27" display="off"/>
 <attribute name="MOUSER" value="540-MX1A-11NW" x="5.334" y="141.8844" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="45.72" y="107.95" size="1.27" layer="25"/>
+<attribute name="NAME" x="44.5516" y="108.1532" size="1.27" layer="25"/>
 <attribute name="VALUE" x="45.72" y="88.9" size="1.27" layer="25"/>
 </element>
 <element name="S8" library="cherry" package="CHERRY_MX" value="CHERRY_MX" x="73.66" y="99.06" smashed="yes">
