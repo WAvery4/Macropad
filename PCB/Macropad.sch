@@ -3825,16 +3825,17 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/SRV05-4.TCT.p
 <errors>
 <approved hash="113,1,139.596,107.846,FRAME1,,,,,"/>
 <approved hash="113,1,429.156,107.846,FRAME2,,,,,"/>
-<approved hash="113,1,429.156,333.906,FRAME3,,,,,"/>
+<approved hash="113,1,512.851,246.151,FRAME3,,,,,"/>
 <approved hash="113,1,139.596,331.366,FRAME4,,,,,"/>
 <approved hash="113,1,226.355,101.6,RESET,,,,,"/>
 <approved hash="113,1,167.877,381.226,ROWS,,,,,"/>
 <approved hash="113,1,170.194,404.086,COLUMNS,,,,,"/>
 <approved hash="113,1,434.577,70.0761,JP4,,,,,"/>
 <approved hash="113,1,56.1171,402.816,JTAG,,,,,"/>
-<approved hash="115,1,424.18,68.58,PF2,,,,,"/>
-<approved hash="115,1,424.18,63.5,PF0,,,,,"/>
+<approved hash="113,1,477.757,106.906,JP1,,,,,"/>
 <approved hash="115,1,424.18,66.04,PF1,,,,,"/>
+<approved hash="115,1,424.18,63.5,PF0,,,,,"/>
+<approved hash="115,1,424.18,68.58,PF2,,,,,"/>
 </errors>
 </schematic>
 </drawing>
