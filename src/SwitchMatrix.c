@@ -132,7 +132,7 @@ void SwitchMatrix_CycleColumnOutput(void)
 {
     long sr = StartCritical();
     ColumnIndex = (ColumnIndex + 1) % COLUMN_COUNT;
-    GPIO_PORTC_DATA_R &= ~0xF0 | (1 << (ColumnIndex + COLUMN_COUNT));
+    PC7654 = 1 << (ColumnIndex + COLUMN_COUNT);
 
     EndCritical(sr);
 }
