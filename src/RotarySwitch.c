@@ -1,51 +1,39 @@
+#define PORT_F_PRIORITY 5
+#define TIMER1A_PRIORITY 3
+
+#include <stdint.h>
 #include "../inc/tm4c123gh6pm.h"
-#include "../inc/Timer0A.h"
 #include "RotarySwitch.h"
 
 /**
- * Arm 10 ms one shot timer for debouncing.
+ * Arm interrupts for PF2-PF0.
  */
-void Timer0_Arm(void){
-	TIMER0_CTL_R = 0x00000000;    // 1) disable TIMER0A during setup
-	TIMER0_CFG_R = 0x00000000;    // 2) configure for 32-bit mode
-	TIMER0_TAMR_R = 0x0000001;    // 3) 1-SHOT mode
-	TIMER0_TAILR_R = 800000;      // 4) 10ms reload value
-	TIMER0_TAPR_R = 0;            // 5) bus clock resolution
-	TIMER0_ICR_R = 0x00000001;    // 6) clear TIMER0A timeout flag
-	TIMER0_IMR_R = 0x00000001;    // 7) arm timeout interrupt
-	NVIC_PRI4_R = (NVIC_PRI4_R&0x00FFFFFF)|0x80000000; // 8) priority 4
-	NVIC_EN0_R = 1<<19;           // 9) enable IRQ 19 in NVIC
-	TIMER0_CTL_R = 0x00000001;    // 10) enable TIMER0A
+static void ArmPortF(void)
+{
+    GPIO_PORTF_ICR_R = 0x07;                                           // Clear flags
+    GPIO_PORTF_IM_R |= 0x07;                                           // Arm interrupt
+    NVIC_PRI7_R = (NVIC_PRI7_R & ~0xE00000) | (PORT_F_PRIORITY << 21); // Set priority (bits 23-21)
+    NVIC_EN0_R = 1 << 30;                                              // Enable IRQ 30 in NVIC
 }
 
 /**
- * Arm interrupts for PF0-2
+ * Arm Timer1A for debouncing.
+ * 
+ * @param period the duration of the timer
  */
-void RotarySwitch_Arm(void) {
-	GPIO_PORTF_ICR_R = 0x07;      // clear flag 0-2
-	GPIO_PORTF_IM_R |= 0x07;      // arm interrupt on PF0-2
-	NVIC_PRI0_R = (NVIC_PRI0_R & ~0xE000) | 0xA000; // Set priority to 5 (bits 15-13)
-	
-	NVIC_EN0_R = 0x00000004;      // enable interrupt 2 in NVIC
-}
-
-void RotarySwitch_Init(void) {
-	SYSCTL_RCGCGPIO_R     |= 0x00000020;      // activate clock for Port F
-	while((SYSCTL_PRGPIO_R & 0x20)==0){};     // allow time for clock to stabilize
-    
-	GPIO_PORTF_LOCK_R     = 0x4C4F434B;       // unlock GPIO Port F
-	GPIO_PORTF_CR_R       = 0x07;             // allow changes to PF0-2
-  
-	GPIO_PORTF_AMSEL_R    = 0x00;             // disable analog on PF
-	GPIO_PORTF_PCTL_R     = 0x00000000;       // PCTL GPIO on PF0-2
-	GPIO_PORTF_DIR_R      = 0x07;             // PF0-2 output
-  GPIO_PORTF_AFSEL_R    = 0x00;             // disable alt funct on PF0-7
-  GPIO_PORTF_PUR_R      = 0x07;             // enable pull-up on PF0-2
-  GPIO_PORTF_DEN_R      = 0x07;             // enable digital I/O on PF0-2
-		
-	SYSCTL_RCGCTIMER_R |= 0x01;   // activate TIMER0 to use for debouncing	
-		
-	RotarySwitch_Arm();	
+static void Timer1A_Arm(uint32_t period)
+{
+    SYSCTL_RCGCTIMER_R |= 0x02;                                          // 0) activate Timer1
+    TIMER1_CTL_R &= ~0x01;                                               // 1) disable Timer1A during setup
+    TIMER1_CFG_R = 0x00;                                                 // 2) configure for 32-bit mode
+    TIMER1_TAMR_R = 0x01;                                                // 3) 1-shot mode
+    TIMER1_TAILR_R = period - 1;                                         // 4) reload value
+    TIMER1_TAPR_R = 0;                                                   // 5) bus clock resolution
+    TIMER1_ICR_R = 0x01;                                                 // 6) clear Timer1A timeout flag
+    TIMER1_IMR_R = 0x01;                                                 // 7) arm timeout interrupt
+    NVIC_PRI5_R = (NVIC_PRI5_R & 0xFFFF00FF) | (TIMER1A_PRIORITY << 13); // 8) set priority
+    NVIC_EN0_R = 1 << 21;                                                // 9) enable IRQ 21 in NVIC
+    TIMER1_CTL_R |= 0x01;                                                // 10) enable Timer1A
 }
 
 /** 
@@ -54,17 +42,55 @@ void RotarySwitch_Init(void) {
  * CCW: PF1
  * Click: PF2
  */
-void GPIOPortF_Handler(void) {
-	GPIO_PORTF_IM_R &= ~0x07;     // disarm interrupt on PF0-2
-	
-	uint32_t triggeredPort = GPIO_PORTF_RIS_R & 0x7;
-	if (triggeredPort == 1) {
-		/* TODO: Increase volume */
-	} else if (triggeredPort == 2) {
-		/* TODO: Decrease volume */
-	} else if (triggeredPort == 4) {
-		/* TODO: Toggle volume mute */
-	}
-	
-	Timer0_Arm();
+void GPIOPortF_Handler(void)
+{
+    GPIO_PORTF_IM_R &= ~0x07; // disarm interrupt on PF0-2
+    uint32_t triggeredPort = GPIO_PORTF_RIS_R & 0x07;
+
+    if (triggeredPort == 1)
+    {
+        /* TODO: Increase volume */
+    }
+    else if (triggeredPort == 2)
+    {
+        /* TODO: Decrease volume */
+    }
+    else if (triggeredPort == 4)
+    {
+        /* TODO: Toggle volume mute */
+    }
+
+    Timer1A_Arm(800000);
+}
+
+/**
+ * Handle re-arming port F.
+ */
+void Timer1A_Handler(void)
+{
+    TIMER1_ICR_R = TIMER_ICR_TATOCINT; // acknowledge TIMER1A timeout
+
+    ArmPortF();
+}
+
+void RotarySwitch_Init(void)
+{
+    SYSCTL_RCGCGPIO_R |= 0x00000020; // activate clock for Port F
+
+    while ((SYSCTL_PRGPIO_R & 0x20) == 0)
+    {
+        // Wait for activation
+    }
+
+    GPIO_PORTF_LOCK_R = 0x4C4F434B;   // Unlock GPIO for port F
+    GPIO_PORTF_DIR_R &= ~0x07;        // Set as input
+    GPIO_PORTF_AFSEL_R &= ~0x07;      // Disable alternate function
+    GPIO_PORTF_DEN_R |= 0x07;         // Enable digital I/O
+    GPIO_PORTF_PCTL_R &= ~0x00000FFF; // Configure as GPIO
+    GPIO_PORTF_AMSEL_R &= ~0x07;      // Disable analog functionality
+    GPIO_PORTF_PUR_R |= 0x07;         // Enable pull-up resistors
+    GPIO_PORTF_IS_R &= ~0x07;         // Set as edge-sensitive
+    GPIO_PORTF_IBE_R |= 0x07;         // Set trigger to both edges
+
+    ArmPortF();
 }
