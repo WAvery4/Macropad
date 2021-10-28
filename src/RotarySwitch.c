@@ -38,7 +38,7 @@ void RotarySwitch_Init(void) {
   
 	GPIO_PORTF_AMSEL_R    = 0x00;             // disable analog on PF
 	GPIO_PORTF_PCTL_R     = 0x00000000;       // PCTL GPIO on PF0-2
-	GPIO_PORTF_DIR_R      = 0x00;             // PF0-2 in
+	GPIO_PORTF_DIR_R      = 0x07;             // PF0-2 output
   GPIO_PORTF_AFSEL_R    = 0x00;             // disable alt funct on PF0-7
   GPIO_PORTF_PUR_R      = 0x07;             // enable pull-up on PF0-2
   GPIO_PORTF_DEN_R      = 0x07;             // enable digital I/O on PF0-2
