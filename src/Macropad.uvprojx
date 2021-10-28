@@ -402,6 +402,21 @@
               <FileType>1</FileType>
               <FilePath>..\inc\CortexM.c</FilePath>
             </File>
+            <File>
+              <FileName>SwitchMatrix.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SwitchMatrix.c</FilePath>
+            </File>
+            <File>
+              <FileName>Timer0A.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\inc\Timer0A.c</FilePath>
+            </File>
+            <File>
+              <FileName>Macro.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Macro.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
