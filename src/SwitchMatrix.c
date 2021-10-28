@@ -93,7 +93,7 @@ static void InitColumns(void)
         // Wait for activation
     }
 
-    GPIO_PORTC_DIR_R = 0xF0;         // Set as output
+    GPIO_PORTC_DIR_R |= 0xF0;         // Set as output
     GPIO_PORTC_AFSEL_R &= ~0xF0;      // Disable alternate function
     GPIO_PORTC_DEN_R |= 0xF0;         // Enable digital I/O
     GPIO_PORTC_PCTL_R &= ~0xFFFF0000; // Configure as GPIO
@@ -139,13 +139,5 @@ void SwitchMatrix_CycleColumnOutput(void)
     }
 
     ColumnIndex = (ColumnIndex + 1) % COLUMN_COUNT;
-
-    for (uint8_t i = 0; i < COLUMN_COUNT; i++)
-    {
-        if (i == ColumnIndex)
-        {
-            // Set next column high
-            *portCAddresses[i] = 1 << (i + COLUMN_COUNT);
-        }
-    }
+    *portCAddresses[ColumnIndex] = 1 << (COLUMN_COUNT + ColumnIndex); // Set next column high
 }
