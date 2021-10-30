@@ -5,7 +5,7 @@
 
 typedef struct Macro
 {
-    char *name;
+    char name[4];
     uint8_t asciiCodes[MAX_KEY_COMBO_COUNT];
 } Macro;
 

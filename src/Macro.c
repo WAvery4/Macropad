@@ -3,6 +3,8 @@
  * Authors: William Avery (add names here)
  * Last Modified: 10/29/2021
  */
+#include <string.h>
+
 #include "Macro.h"
 #include "../inc/diskio.h"
 #include "../inc/ff.h"
@@ -43,7 +45,8 @@ void Macro_Init(void)
         {
             for (uint8_t j = 0; j < COLUMN_COUNT; j++)
             {
-                char* name;
+                char name[4];
+                name[3] = 0x00; // null terminate the string
                 uint8_t nameIdx = 0;
                 // read in the name of the macro
                 Fresult = f_read(&Handle, &ch, 1, &successfulReads);
@@ -57,8 +60,8 @@ void Macro_Init(void)
                     Fresult = f_read(&Handle, &ch, 1, &successfulReads);
                 }
                 
-                Macro_Keybindings[i][j].name = name;
-
+                strcpy(Macro_Keybindings[i][j].name, name);
+                
                 // read in how many keys are in the macro
                 Fresult = f_read(&Handle, &ch, 1, &successfulReads);
                 uint8_t numKeys = ch - 0x30;
