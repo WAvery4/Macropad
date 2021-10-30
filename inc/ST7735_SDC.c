@@ -1292,12 +1292,12 @@ void ST7735_DrawChar(int16_t x, int16_t y, char c, int16_t textColor, int16_t bg
 
   setAddrWindow(x, y, x+6*size-1, y+8*size-1);
 
-  line = 0x01;        // print the top row first
-  // print the rows, starting at the top
+  line = 0x80;        // print the bottom row first
+  // print the rows, starting at the bottom
   for(row=0; row<8; row=row+1){
     for(i=0; i<size; i=i+1){
-      // print the columns, starting on the left
-      for(col=0; col<5; col=col+1){
+      // print the columns, starting on the right
+      for(col=4; col>=0; col=col-1){
         if(Font[(c*5)+col]&line){
           // bit is set in Font, print pixel(s) in text color
           for(j=0; j<size; j=j+1){
@@ -1315,7 +1315,7 @@ void ST7735_DrawChar(int16_t x, int16_t y, char c, int16_t textColor, int16_t bg
         pushColor(bgColor);
       }
     }
-    line = line<<1;   // move up to the next row
+    line = line>>1;   // move up to the next row
   }
 }
 //------------ST7735_DrawString------------
