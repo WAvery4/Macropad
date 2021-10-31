@@ -75,15 +75,6 @@ __heap_limit
 
 ;******************************************************************************
 ;
-; External declarations for the interrupt handlers used by the application.
-;
-;******************************************************************************
-        EXTERN  SysTickIntHandler
-        ; EXTERN  UARTStdioIntHandler
-        EXTERN  USB0DeviceIntHandler
-
-;******************************************************************************
-;
 ; The vector table.
 ;
 ;******************************************************************************
@@ -306,6 +297,10 @@ FaultISR
 ;
 ;******************************************************************************
 IntDefaultHandler
+        EXPORT SysTickIntHandler [WEAK]
+        EXPORT USB0DeviceIntHandler [WEAK]
+SysTickIntHandler
+USB0DeviceIntHandler
         B       IntDefaultHandler
 
 ;******************************************************************************
