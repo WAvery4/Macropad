@@ -99,7 +99,7 @@ void GPIOPortB_Handler(void)
 
     for (uint8_t i = 0; i < ROW_COUNT; i++)
     {
-        if ((triggeredPort >> i) == 1)
+        if ((triggeredPort >> (i + COLUMN_COUNT)) == 1)
         {
             // Handle switch press
             Macro selectedMacro = Macro_Keybindings[i][ColumnIndex];
