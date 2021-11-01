@@ -445,12 +445,12 @@
             <File>
               <FileName>driverlib.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>C:\ti\TivaWare_C_Series-2.2.0.295\driverlib\rvmdk\driverlib.lib</FilePath>
+              <FilePath>..\driverlib\rvmdk\driverlib.lib</FilePath>
             </File>
             <File>
               <FileName>usblib.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>C:\ti\TivaWare_C_Series-2.2.0.295\usblib\rvmdk\usblib.lib</FilePath>
+              <FilePath>..\usblib\rvmdk\usblib.lib</FilePath>
             </File>
           </Files>
         </Group>
