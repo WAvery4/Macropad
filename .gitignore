@@ -25,7 +25,7 @@
 *.pch
 
 # Libraries
-*.lib
+# *.lib
 *.a
 *.la
 *.lo
@@ -139,7 +139,7 @@ eagle.epf
 *.ABS
 
 # Libraries
-*.LIB
+# *.LIB
 
 
 # uv output
