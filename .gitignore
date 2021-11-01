@@ -252,6 +252,7 @@ $RECYCLE.BIN/
 *.htm
 *.scvd
 *.sgxx
+Objects/
 RTE/
 
 # Code Composer Studio (CCS)

@@ -59,7 +59,7 @@ static void InitRows(void)
     GPIO_PORTB_DEN_R |= 0x3F;         // Enable digital I/O
     GPIO_PORTB_PCTL_R &= ~0x00FFFFFF; // Configure as GPIO
     GPIO_PORTB_AMSEL_R &= ~0x3F;      // Disable analog functionality
-    GPIO_PORTB_PUR_R |= 0x3F;         // Enable pull-up resistors
+    GPIO_PORTB_PDR_R |= 0x3F;         // Enable pull-down resistors
     GPIO_PORTB_IS_R &= ~0x3F;         // Set as edge-sensitive
     GPIO_PORTB_IBE_R |= 0x3F;         // Set trigger to both edges
 
@@ -99,7 +99,7 @@ void GPIOPortB_Handler(void)
 
     for (uint8_t i = 0; i < ROW_COUNT; i++)
     {
-        if ((triggeredPort >> (i + COLUMN_COUNT)) == 1)
+        if (triggeredPort >> i == 1)
         {
             // Handle switch press
             Macro selectedMacro = Macro_Keybindings[i][ColumnIndex];

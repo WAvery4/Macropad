@@ -438,11 +438,6 @@
               <FilePath>.\usb_keyb_structs.c</FilePath>
             </File>
             <File>
-              <FileName>startup_rvmdk.S</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\startup_rvmdk.S</FilePath>
-            </File>
-            <File>
               <FileName>driverlib.lib</FileName>
               <FileType>4</FileType>
               <FilePath>..\driverlib\rvmdk\driverlib.lib</FilePath>
@@ -451,6 +446,11 @@
               <FileName>usblib.lib</FileName>
               <FileType>4</FileType>
               <FilePath>..\usblib\rvmdk\usblib.lib</FilePath>
+            </File>
+            <File>
+              <FileName>startup.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\startup.s</FilePath>
             </File>
           </Files>
         </Group>

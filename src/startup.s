@@ -147,7 +147,7 @@ __Vectors
         DCD     CAN2_Handler                ; CAN2
         DCD     Ethernet_Handler            ; Ethernet
         DCD     Hibernate_Handler           ; Hibernate
-        DCD     USB0_Handler                ; USB0
+        DCD     USB0DeviceIntHandler        ; USB0
         DCD     PWM0Generator3_Handler      ; PWM 0 Generator 3
         DCD     uDMA_Handler                ; uDMA Software Transfer
         DCD     uDMA_Error                  ; uDMA Error
@@ -380,7 +380,7 @@ IntDefaultHandler\
                 EXPORT  CAN2_Handler              [WEAK]
                 EXPORT  Ethernet_Handler          [WEAK]
                 EXPORT  Hibernate_Handler         [WEAK]
-                EXPORT  USB0_Handler              [WEAK]
+                EXPORT  USB0DeviceIntHandler      [WEAK]
                 EXPORT  PWM0Generator3_Handler    [WEAK]
                 EXPORT  uDMA_Handler              [WEAK]
                 EXPORT  uDMA_Error                [WEAK]
@@ -495,7 +495,7 @@ CAN1_Handler
 CAN2_Handler
 Ethernet_Handler
 Hibernate_Handler
-USB0_Handler
+USB0DeviceIntHandler
 PWM0Generator3_Handler
 uDMA_Handler
 uDMA_Error

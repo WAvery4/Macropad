@@ -21,17 +21,12 @@
  * 2 - Macro.c Test
  * 3 - Keyboard Test
  */
-#define __MAIN__ 3
+#define __MAIN__ 0
 
-//uint32_t KeyboardHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgData, void *pvMsgData)
-//{
-//    return 42;
-//}
-
-//void SysTickIntHandler(void)
-//{
-//    return;
-//}
+uint32_t KeyboardHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgData, void *pvMsgData)
+{
+   return 42;
+}
 
 #if __MAIN__ == 0
 int main(void)
@@ -664,7 +659,7 @@ void SendString(char *pcStr)
 // timeouts.
 //
 //*****************************************************************************
-void SysTickIntHandler(void)
+void SysTick_Handler(void)
 {
     g_ui32SysTickCount++;
 }
