@@ -428,16 +428,6 @@
               <FilePath>..\inc\ST7735_SDC.c</FilePath>
             </File>
             <File>
-              <FileName>driverlib.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>..\driverlib\rvmdk\driverlib.lib</FilePath>
-            </File>
-            <File>
-              <FileName>usblib.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>..\usblib\rvmdk\usblib.lib</FilePath>
-            </File>
-            <File>
               <FileName>buttons.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\drivers\buttons.c</FilePath>
@@ -451,6 +441,16 @@
               <FileName>startup_rvmdk.S</FileName>
               <FileType>2</FileType>
               <FilePath>.\startup_rvmdk.S</FilePath>
+            </File>
+            <File>
+              <FileName>driverlib.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>C:\ti\TivaWare_C_Series-2.2.0.295\driverlib\rvmdk\driverlib.lib</FilePath>
+            </File>
+            <File>
+              <FileName>usblib.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>C:\ti\TivaWare_C_Series-2.2.0.295\usblib\rvmdk\usblib.lib</FilePath>
             </File>
           </Files>
         </Group>

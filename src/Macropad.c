@@ -21,17 +21,17 @@
  * 2 - Macro.c Test
  * 3 - Keyboard Test
  */
-#define __MAIN__ 2
+#define __MAIN__ 3
 
-uint32_t KeyboardHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgData, void *pvMsgData)
-{
-    return 42;
-}
+//uint32_t KeyboardHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgData, void *pvMsgData)
+//{
+//    return 42;
+//}
 
-void SysTickIntHandler(void)
-{
-    return;
-}
+//void SysTickIntHandler(void)
+//{
+//    return;
+//}
 
 #if __MAIN__ == 0
 int main(void)
