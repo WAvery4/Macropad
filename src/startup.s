@@ -80,6 +80,8 @@ __heap_limit
         AREA    RESET, CODE, READONLY
         THUMB
 
+        EXTERN USB0DeviceIntHandler
+
 ;******************************************************************************
 ;
 ; The vector table.
@@ -380,7 +382,7 @@ IntDefaultHandler\
                 EXPORT  CAN2_Handler              [WEAK]
                 EXPORT  Ethernet_Handler          [WEAK]
                 EXPORT  Hibernate_Handler         [WEAK]
-                EXPORT  USB0DeviceIntHandler      [WEAK]
+                ;EXPORT  USB0DeviceIntHandler      [WEAK]
                 EXPORT  PWM0Generator3_Handler    [WEAK]
                 EXPORT  uDMA_Handler              [WEAK]
                 EXPORT  uDMA_Error                [WEAK]
@@ -495,7 +497,7 @@ CAN1_Handler
 CAN2_Handler
 Ethernet_Handler
 Hibernate_Handler
-USB0DeviceIntHandler
+;USB0DeviceIntHandler
 PWM0Generator3_Handler
 uDMA_Handler
 uDMA_Error
