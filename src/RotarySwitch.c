@@ -1,9 +1,18 @@
 #define PORT_F_PRIORITY 5
 #define TIMER1A_PRIORITY 3
 
+#include <stdbool.h>
 #include <stdint.h>
 #include "../inc/tm4c123gh6pm.h"
+#include "../inc/Unified_Port_Init.h"
+#include "../usblib/usblib.h"
+#include "../usblib/usbhid.h"
+#include "Macro.h"
 #include "RotarySwitch.h"
+
+static const Macro VOLUME_UP = {"V+", {HID_KEYB_USAGE_VOLUME_UP}};
+static const Macro VOLUME_DOWN = {"V-", {HID_KEYB_USAGE_VOLUME_DOWN}};
+static const Macro VOLUME_MUTE = {"VM", {HID_KEYB_USAGE_VOLUME_MUTE}};
 
 /**
  * Arm interrupts for PF2-PF0.
@@ -36,31 +45,60 @@ static void Timer1A_Arm(uint32_t period)
     TIMER1_CTL_R |= 0x01;                                                // 10) enable Timer1A
 }
 
+/**
+ * Handle clockwise knob rotation.
+ */
+static void HandleClockwise()
+{
+    Macro_Execute(VOLUME_UP);
+}
+
+/**
+ * Handle counterclockwise knob rotation.
+ */
+static void HandleCounterClockwise()
+{
+    Macro_Execute(VOLUME_DOWN);
+}
+
+/**
+ * Handle push on knob.
+ */
+static void HandlePush()
+{
+    Macro_Execute(VOLUME_MUTE);
+}
+
 /** 
  * Handle Port F interaction.
- * CW: PF0
  * CCW: PF1
  * Click: PF2
  */
 void GPIOPortF_Handler(void)
 {
-    GPIO_PORTF_IM_R &= ~0x07; // disarm interrupt on PF0-2
-    uint32_t triggeredPort = GPIO_PORTF_RIS_R & 0x07;
+    uint32_t triggeredPortF = GPIO_PORTF_RIS_R & 0x06;
 
-    if (triggeredPort == 1)
+    if (triggeredPortF == 0x04)
     {
-        /* TODO: Increase volume */
+        // Handle push
+        GPIO_PORTF_IM_R &= ~0x06; // disarm interrupt on PF1-2
+
+        HandlePush();
+        Timer1A_Arm(800000);
     }
-    else if (triggeredPort == 2)
+    else
     {
-        /* TODO: Decrease volume */
-    }
-    else if (triggeredPort == 4)
-    {
-        /* TODO: Toggle volume mute */
+        if (PF1 == 0)
+        {
+            HandleClockwise();
+        }
+        else
+        {
+            HandleCounterClockwise();
+        }
     }
 
-    Timer1A_Arm(800000);
+    GPIO_PORTF_ICR_R = 0x06;
 }
 
 /**
@@ -83,14 +121,14 @@ void RotarySwitch_Init(void)
     }
 
     GPIO_PORTF_LOCK_R = 0x4C4F434B;   // Unlock GPIO for port F
-    GPIO_PORTF_DIR_R &= ~0x07;        // Set as input
-    GPIO_PORTF_AFSEL_R &= ~0x07;      // Disable alternate function
-    GPIO_PORTF_DEN_R |= 0x07;         // Enable digital I/O
+    GPIO_PORTF_DIR_R &= ~0x06;        // Set as input
+    GPIO_PORTF_AFSEL_R &= ~0x06;      // Disable alternate function
+    GPIO_PORTF_DEN_R |= 0x06;         // Enable digital I/O
     GPIO_PORTF_PCTL_R &= ~0x00000FFF; // Configure as GPIO
-    GPIO_PORTF_AMSEL_R &= ~0x07;      // Disable analog functionality
-    GPIO_PORTF_PUR_R |= 0x07;         // Enable pull-up resistors
-    GPIO_PORTF_IS_R &= ~0x07;         // Set as edge-sensitive
-    GPIO_PORTF_IBE_R |= 0x07;         // Set trigger to both edges
+    GPIO_PORTF_AMSEL_R &= ~0x06;      // Disable analog functionality
+    GPIO_PORTF_PUR_R |= 0x06;         // Enable pull-up resistors
+    GPIO_PORTF_IS_R &= ~0x06;         // Set as edge-sensitive
+    GPIO_PORTF_IBE_R |= 0x06;         // Set trigger to both edges
 
     ArmPortF();
 }

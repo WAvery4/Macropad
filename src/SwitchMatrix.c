@@ -6,8 +6,8 @@
 #include "Macro.h"
 #include "SwitchMatrix.h"
 
-extern long StartCritical(void);
-extern void EndCritical(long sr);
+long StartCritical(void);
+void EndCritical(long sr);
 
 static uint8_t ColumnIndex;
 
@@ -95,11 +95,11 @@ static void InitColumns(void)
 void GPIOPortB_Handler(void)
 {
     GPIO_PORTB_IM_R &= ~0x3F; // Disarm interrupts
-    uint32_t triggeredPort = GPIO_PORTB_RIS_R & 0x3F;
+    uint32_t triggeredPortB = GPIO_PORTB_RIS_R & 0x3F;
 
     for (uint8_t i = 0; i < ROW_COUNT; i++)
     {
-        if (triggeredPort >> i == 1)
+        if (triggeredPortB >> i == 1)
         {
             // Handle switch press
             Macro selectedMacro = Macro_Keybindings[i][ColumnIndex];
@@ -125,7 +125,7 @@ void SwitchMatrix_Init(void)
 {
     InitRows();
     InitColumns();
-    Macro_Init();
+    // Macro_Init();
 }
 
 void SwitchMatrix_CycleColumnOutput(void)

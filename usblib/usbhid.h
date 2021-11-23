@@ -273,6 +273,9 @@ extern "C"
 #define HID_KEYB_USAGE_KEYPAD_0 0x62
 #define HID_KEYB_USAGE_KEPAD_PERIOD \
                                 0x63
+#define HID_KEYB_USAGE_VOLUME_UP 0x80
+#define HID_KEYB_USAGE_VOLUME_DOWN 0x81
+#define HID_KEYB_USAGE_VOLUME_MUTE 0x7F
 
 //*****************************************************************************
 //
