@@ -111,6 +111,7 @@ extern "C"
 #define USB_HID_RX              0x33
 #define USB_HID_RY              0x34
 #define USB_HID_RZ              0x35
+#define USB_HID_CONSUMER        0x0C
 
 #define USB_HID_POINTER         0x01
 #define USB_HID_MOUSE           0x02
@@ -273,9 +274,9 @@ extern "C"
 #define HID_KEYB_USAGE_KEYPAD_0 0x62
 #define HID_KEYB_USAGE_KEPAD_PERIOD \
                                 0x63
-#define HID_KEYB_USAGE_VOLUME_UP 0x80
-#define HID_KEYB_USAGE_VOLUME_DOWN 0x81
-#define HID_KEYB_USAGE_VOLUME_MUTE 0x7F
+#define HID_KEYB_USAGE_VOLUME_UP 0xe9
+#define HID_KEYB_USAGE_VOLUME_DOWN 0xea
+#define HID_KEYB_USAGE_VOLUME_MUTE 0xe2
 
 //*****************************************************************************
 //

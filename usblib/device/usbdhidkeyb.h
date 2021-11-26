@@ -105,7 +105,7 @@ tKeyboardState;
 // The size of the keyboard input and output reports.
 //
 //*****************************************************************************
-#define KEYB_IN_REPORT_SIZE 8
+#define KEYB_IN_REPORT_SIZE 9
 #define KEYB_OUT_REPORT_SIZE 1
 
 //*****************************************************************************
@@ -339,6 +339,7 @@ extern void USBDHIDKeyboardTerm(void *pvKeyboardInstance);
 extern void *USBDHIDKeyboardSetCBData(void *pvKeyboardInstance,
                                       void *pvCBData);
 extern uint32_t USBDHIDKeyboardKeyStateChange(void *pvKeyboardInstance,
+                                              uint8_t reportId,
                                               uint8_t ui8Modifiers,
                                               uint8_t ui8UsageCode,
                                               bool bPressed);

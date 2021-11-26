@@ -135,7 +135,7 @@ static const uint8_t g_pui8KeybReportDescriptor[] =
     UsagePage(USB_HID_GENERIC_DESKTOP),
     Usage(USB_HID_KEYBOARD),
     Collection(USB_HID_APPLICATION),
-
+        ReportID(0x01),
         //
         // Modifier keys.
         // 8 - 1 bit values indicating the modifier keys (ctrl, shift...)
@@ -183,9 +183,34 @@ static const uint8_t g_pui8KeybReportDescriptor[] =
         LogicalMinimum(0),
         LogicalMaximum(101),
         UsagePage(USB_HID_USAGE_KEYCODES),
-        UsageMinimum (0),
-        UsageMaximum (101),
+        UsageMinimum(0),
+        UsageMaximum(101),
         Input(USB_HID_INPUT_DATA | USB_HID_INPUT_ARRAY),
+    
+    EndCollection,
+
+    UsagePage(USB_HID_CONSUMER),
+    Usage(0x01),
+    Collection(USB_HID_APPLICATION),
+        ReportID(2),
+        UsagePage(USB_HID_CONSUMER),
+        LogicalMaximum(1),
+        LogicalMinimum(0),
+        ReportCount(3),
+        ReportSize(1),
+        Usage(0xe2),
+        Usage(0xe9),
+        Usage(0xea),
+        Output(USB_HID_OUTPUT_DATA | USB_HID_OUTPUT_VARIABLE |
+               USB_HID_OUTPUT_ABS),
+        
+        //
+        // 1 - 5 bit value to pad out to a full byte.
+        //
+        ReportCount(1),
+        ReportSize(5),
+        Output(USB_HID_OUTPUT_CONSTANT), //LED report padding
+
     EndCollection
 };
 
@@ -1097,7 +1122,7 @@ USBDHIDKeyboardSetCBData(void *pvKeyboardDevice, void *pvCBData)
 //
 //*****************************************************************************
 uint32_t
-USBDHIDKeyboardKeyStateChange(void *pvKeyboardDevice, uint8_t ui8Modifiers,
+USBDHIDKeyboardKeyStateChange(void *pvKeyboardDevice, uint8_t reportId, uint8_t ui8Modifiers,
                               uint8_t ui8UsageCode, bool bPress)
 {
     bool bRetcode;
@@ -1123,56 +1148,62 @@ USBDHIDKeyboardKeyStateChange(void *pvKeyboardDevice, uint8_t ui8Modifiers,
     //
     psInst = &psHIDKbDevice->sPrivateData;
 
-    //
-    // Update the global keyboard report with the information passed.
-    //
-    psInst->pui8Report[0] = ui8Modifiers;
-    psInst->pui8Report[1] = 0;
+    psInst->pui8Report[0] = reportId;
 
-    //
-    // Were we passed a usage code for a new key press or release or was
-    // this call just telling us about a modifier change?
-    //
-    if(ui8UsageCode != HID_KEYB_USAGE_RESERVED)
+    if (reportId == 2)
     {
+        psInst->pui8Report[1] = ui8UsageCode;
+    } else {
         //
-        // Has a key been pressed or released?
+        // Update the global keyboard report with the information passed.
         //
-        if(bPress)
-        {
-            //
-            // A key has been pressed - add it to the list if there is space an
-            // and the key is not already in the list.
-            //
-            bRetcode = AddKeyToPressedList(psInst, ui8UsageCode);
-        }
-        else
-        {
-            //
-            // A key has been released - remove it from the list.
-            //
-            bRetcode = RemoveKeyFromPressedList(psInst, ui8UsageCode);
+        psInst->pui8Report[1] = ui8Modifiers;
+        psInst->pui8Report[2] = 0;
 
+        //
+        // Were we passed a usage code for a new key press or release or was
+        // this call just telling us about a modifier change?
+        //
+        if (ui8UsageCode != HID_KEYB_USAGE_RESERVED)
+        {
             //
-            // The return code here indicates whether the key was found.  If it
-            // wasn't, the list has not changes so merely exit at this point
-            // without sending anything to the host.
+            // Has a key been pressed or released?
             //
-            if(!bRetcode)
+            if (bPress)
             {
-                return(KEYB_ERR_NOT_FOUND);
+                //
+                // A key has been pressed - add it to the list if there is space an
+                // and the key is not already in the list.
+                //
+                bRetcode = AddKeyToPressedList(psInst, ui8UsageCode);
             }
-        }
+            else
+            {
+                //
+                // A key has been released - remove it from the list.
+                //
+                bRetcode = RemoveKeyFromPressedList(psInst, ui8UsageCode);
 
-        //
-        // Build the report from the current list of keys.  If we added a key
-        // and got a bad return code indicating a roll over error, we need to
-        // send a roll over report
-        //
-        for(ui32Loop = 0; ui32Loop < KEYB_MAX_CHARS_PER_REPORT; ui32Loop++)
-        {
-            psInst->pui8Report[2 + ui32Loop] = (bRetcode ?
-                psInst->pui8KeysPressed[ui32Loop] : HID_KEYB_USAGE_ROLLOVER);
+                //
+                // The return code here indicates whether the key was found.  If it
+                // wasn't, the list has not changes so merely exit at this point
+                // without sending anything to the host.
+                //
+                if (!bRetcode)
+                {
+                    return (KEYB_ERR_NOT_FOUND);
+                }
+            }
+
+            //
+            // Build the report from the current list of keys.  If we added a key
+            // and got a bad return code indicating a roll over error, we need to
+            // send a roll over report
+            //
+            for (ui32Loop = 0; ui32Loop < KEYB_MAX_CHARS_PER_REPORT; ui32Loop++)
+            {
+                psInst->pui8Report[3 + ui32Loop] = (bRetcode ? psInst->pui8KeysPressed[ui32Loop] : HID_KEYB_USAGE_ROLLOVER);
+            }
         }
     }
 

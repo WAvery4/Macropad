@@ -10,9 +10,9 @@
 #include "Macro.h"
 #include "RotarySwitch.h"
 
-static const Macro VOLUME_UP = {"V+", {HID_KEYB_USAGE_VOLUME_UP}};
-static const Macro VOLUME_DOWN = {"V-", {HID_KEYB_USAGE_VOLUME_DOWN}};
-static const Macro VOLUME_MUTE = {"VM", {HID_KEYB_USAGE_VOLUME_MUTE}};
+static const Macro VOLUME_UP = {"V+", {2}};
+static const Macro VOLUME_DOWN = {"V-", {4}};
+static const Macro VOLUME_MUTE = {"VM", {1}};
 
 /**
  * Arm interrupts for PF2-PF0.
@@ -76,9 +76,11 @@ static void HandlePush()
  */
 void GPIOPortF_Handler(void)
 {
-    uint32_t triggeredPortF = GPIO_PORTF_RIS_R & 0x06;
+    static uint8_t prevSigA, prevSigB;
+    uint8_t sigA = (PF1 >> 1), sigB = (PF2 >> 2);
+    uint32_t triggeredPortF = GPIO_PORTF_RIS_R & 0x07;
 
-    if (triggeredPortF == 0x04)
+    if (triggeredPortF == 0x01)
     {
         // Handle push
         GPIO_PORTF_IM_R &= ~0x06; // disarm interrupt on PF1-2
@@ -88,14 +90,33 @@ void GPIOPortF_Handler(void)
     }
     else
     {
-        if (PF1 == 0)
+        if (sigA == sigB)
         {
-            HandleClockwise();
+            if (sigA == 1)
+            {
+                if (prevSigA == 0)
+                {
+                    HandleClockwise();
+                }
+                else
+                {
+                    HandleCounterClockwise();
+                }
+            }
+            else
+            {
+                if (prevSigA == 0)
+                {
+                    HandleCounterClockwise();
+                }
+                else
+                {
+                    HandleClockwise();
+                }
+            }
         }
-        else
-        {
-            HandleCounterClockwise();
-        }
+        prevSigA = sigA;
+        prevSigB = sigB;
     }
 
     GPIO_PORTF_ICR_R = 0x06;
@@ -121,14 +142,14 @@ void RotarySwitch_Init(void)
     }
 
     GPIO_PORTF_LOCK_R = 0x4C4F434B;   // Unlock GPIO for port F
-    GPIO_PORTF_DIR_R &= ~0x06;        // Set as input
-    GPIO_PORTF_AFSEL_R &= ~0x06;      // Disable alternate function
-    GPIO_PORTF_DEN_R |= 0x06;         // Enable digital I/O
+    GPIO_PORTF_DIR_R &= ~0x07;        // Set as input
+    GPIO_PORTF_AFSEL_R &= ~0x07;      // Disable alternate function
+    GPIO_PORTF_DEN_R |= 0x07;         // Enable digital I/O
     GPIO_PORTF_PCTL_R &= ~0x00000FFF; // Configure as GPIO
-    GPIO_PORTF_AMSEL_R &= ~0x06;      // Disable analog functionality
-    GPIO_PORTF_PUR_R |= 0x06;         // Enable pull-up resistors
-    GPIO_PORTF_IS_R &= ~0x06;         // Set as edge-sensitive
-    GPIO_PORTF_IBE_R |= 0x06;         // Set trigger to both edges
+    GPIO_PORTF_AMSEL_R &= ~0x07;      // Disable analog functionality
+    GPIO_PORTF_PUR_R |= 0x07;         // Enable pull-up resistors
+    GPIO_PORTF_IS_R &= ~0x07;         // Set as edge-sensitive
+    GPIO_PORTF_IBE_R |= 0x07;         // Set trigger to both edges
 
     ArmPortF();
 }
