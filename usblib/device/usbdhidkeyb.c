@@ -208,7 +208,7 @@ static const uint8_t g_pui8KeybReportDescriptor[] =
         //
         ReportCount(1),
         ReportSize(5),
-        Input(USB_HID_INPUT_CONSTANT), //LED report padding
+        Input(USB_HID_INPUT_CONSTANT),
 
     EndCollection
 };
@@ -1152,7 +1152,13 @@ USBDHIDKeyboardKeyStateChange(void *pvKeyboardDevice, uint8_t reportId, uint8_t 
     if (reportId == 2)
     {
         psInst->pui8Report[1] = ui8UsageCode;
-    } else {
+        for (uint8_t i = 2; i < KEYB_IN_REPORT_SIZE; i++)
+        {
+            psInst->pui8Report[i] = 0;
+        }
+    } 
+    else 
+    {
         //
         // Update the global keyboard report with the information passed.
         //
