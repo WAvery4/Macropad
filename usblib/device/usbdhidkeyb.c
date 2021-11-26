@@ -201,15 +201,14 @@ static const uint8_t g_pui8KeybReportDescriptor[] =
         Usage(0xe2),
         Usage(0xe9),
         Usage(0xea),
-        Output(USB_HID_OUTPUT_DATA | USB_HID_OUTPUT_VARIABLE |
-               USB_HID_OUTPUT_ABS),
+        Input(USB_HID_INPUT_DATA | USB_HID_INPUT_VARIABLE |USB_HID_INPUT_ABS),
         
         //
         // 1 - 5 bit value to pad out to a full byte.
         //
         ReportCount(1),
         ReportSize(5),
-        Output(USB_HID_OUTPUT_CONSTANT), //LED report padding
+        Input(USB_HID_INPUT_CONSTANT), //LED report padding
 
     EndCollection
 };
