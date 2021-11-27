@@ -141,7 +141,7 @@ tUSBDHIDKeyboardDevice g_sKeyboardDevice =
     USB_VID_TI_1CBE,
     USB_PID_KEYBOARD,
     500,
-    USB_CONF_ATTR_SELF_PWR | USB_CONF_ATTR_RWAKE,
+    USB_CONF_ATTR_BUS_PWR | USB_CONF_ATTR_RWAKE,
     KeyboardHandler,
     (void *)&g_sKeyboardDevice,
     g_ppui8StringDescriptors,

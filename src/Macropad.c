@@ -21,7 +21,7 @@
  * 2 - Macro.c Test
  * 3 - Keyboard Test
  */
-#define __MAIN__ 3
+#define __MAIN__ 0
 
 // uint32_t KeyboardHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgData, void *pvMsgData)
 // {
@@ -31,11 +31,12 @@
 #if __MAIN__ == 0
 int main(void)
 {
-    PLL_Init(Bus80MHz);
+    PLL_Init(Bus50MHz);
     DisableInterrupts();
     SwitchMatrix_Init();
     RotarySwitch_Init();
     EnableInterrupts();
+    Macro_Init();
 
     while (1)
     {
