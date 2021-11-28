@@ -207,74 +207,76 @@ bool WaitForSendIdle(uint_fast32_t ui32TimeoutTicks)
  */
 void Macro_Init(void)
 {
-    // UINT successfulReads;
-    // uint8_t ch, x, y;
+    UINT successfulReads;
+    uint8_t ch, x, y;
 
-    // MountFresult = f_mount(&g_sFatFs, "", 0); // mount the filesystem
-    // if (MountFresult)
-    // {
-    //     ST7735_DrawString(122, 148, "f_mount error", ST7735_Color565(0, 0, 255));
-    //     while (1)
-    //     {
-    //     };
-    // }
-    // Fresult = f_open(&Handle, inFilename, FA_READ); // open mac.txt
-    // x = 122, y = 130;
-    // if (Fresult == FR_OK)
-    // {
-    //     for (uint8_t i = 0; i < ROW_COUNT; i++)
-    //     {
-    //         for (uint8_t j = 0; j < COLUMN_COUNT; j++)
-    //         {
-    //             char name[4];
-    //             name[3] = 0x00; // null terminate the string
-    //             uint8_t nameIdx = 0;
-    //             // read in the name of the macro
-    //             Fresult = f_read(&Handle, &ch, 1, &successfulReads);
-    //             while ((Fresult == FR_OK) && (successfulReads == 1) && (ch != 0x20))
-    //             {
-    //                 ST7735_DrawChar(x, y, ch, ST7735_Color565(255, 255, 255), 0, 1);
-    //                 name[nameIdx] = ch;
-    //                 nameIdx++;
-    //                 // go to the next column
-    //                 x -= 6;
-    //                 // read the next character into 'ch'
-    //                 Fresult = f_read(&Handle, &ch, 1, &successfulReads);
-    //             }
+    MountFresult = f_mount(&g_sFatFs, "", 0); // mount the filesystem
+    if (MountFresult)
+    {
+        ST7735_DrawString(122, 148, "f_mount error", ST7735_Color565(0, 0, 255));
+        while (1)
+        {
+        };
+    }
+    Fresult = f_open(&Handle, inFilename, FA_READ); // open mac.txt
+    x = 122, y = 130;
+    if (Fresult == FR_OK)
+    {
+        for (uint8_t i = 0; i < ROW_COUNT; i++)
+        {
+            for (uint8_t j = 0; j < COLUMN_COUNT; j++)
+            {
+                char name[4];
+                name[3] = 0x00; // null terminate the string
+                uint8_t nameIdx = 0;
+                // read in the name of the macro
+                Fresult = f_read(&Handle, &ch, 1, &successfulReads);
+                while ((Fresult == FR_OK) && (successfulReads == 1) && (ch != 0x20))
+                {
+                    ST7735_DrawChar(x, y, ch, ST7735_Color565(255, 255, 255), 0, 1);
+                    name[nameIdx] = ch;
+                    nameIdx++;
+                    // go to the next column
+                    x -= 6;
+                    // read the next character into 'ch'
+                    Fresult = f_read(&Handle, &ch, 1, &successfulReads);
+                }
 
-    //             strcpy(Macro_Keybindings[i][j].name, name);
+                strcpy(Macro_Keybindings[i][j].name, name);
 
-    //             // read in how many keys are in the macro
-    //             Fresult = f_read(&Handle, &ch, 1, &successfulReads);
-    //             uint8_t numKeys = ch - 0x30;
+                // read in how many keys are in the macro
+                Fresult = f_read(&Handle, &ch, 1, &successfulReads);
+                uint8_t numKeys = ch - 0x30;
 
-    //             // read extra space character
-    //             Fresult = f_read(&Handle, &ch, 1, &successfulReads);
-    //             x -= 6; // add space between macro name and macro keys
+                strcpy(Macro_Keybindings[i][j].numKeys, numKeys);
 
-    //             for (int k = 0; k < numKeys; k++)
-    //             {
-    //                 // read in the k-th key
-    //                 Fresult = f_read(&Handle, &ch, 1, &successfulReads);
-    //                 Macro_Keybindings[i][j].asciiCodes[k] = ch;
-    //             }
+                // read extra space character
+                Fresult = f_read(&Handle, &ch, 1, &successfulReads);
+                x -= 6; // add space between macro name and macro keys
 
-    //             // read return and new line characters
-    //             Fresult = f_read(&Handle, &ch, 1, &successfulReads);
-    //             Fresult = f_read(&Handle, &ch, 1, &successfulReads);
-    //             x -= 12;
-    //         }
-    //         x = 122;
-    //         y -= 20;
-    //     }
-    // }
-    // else
-    // {
-    //     ST7735_DrawString(122, 148, "f_open error", ST7735_Color565(0, 0, 255));
-    //     while (1)
-    //     {
-    //     };
-    // }
+                for (int k = 0; k < numKeys; k++)
+                {
+                    // read in the k-th key
+                    Fresult = f_read(&Handle, &ch, 1, &successfulReads);
+                    Macro_Keybindings[i][j].asciiCodes[k] = ch;
+                }
+
+                // read return and new line characters
+                Fresult = f_read(&Handle, &ch, 1, &successfulReads);
+                Fresult = f_read(&Handle, &ch, 1, &successfulReads);
+                x -= 12;
+            }
+            x = 122;
+            y -= 20;
+        }
+    }
+    else
+    {
+        ST7735_DrawString(122, 148, "f_open error", ST7735_Color565(0, 0, 255));
+        while (1)
+        {
+        };
+    }
 
     MAP_FPULazyStackingEnable();
 
@@ -425,8 +427,60 @@ void SendMediaKey(uint8_t HIDCode)
     }
 }
 
+void SendKeys(uint8_t *HIDCodes, uint8_t numKeys)
+{
+    for (uint8_t i = 0; i < numKeys; i++)
+    {
+        //
+        // Send the key press message.
+        //
+        g_eKeyboardState = STATE_SENDING;
+        if (USBDHIDKeyboardKeyStateChange((void *)&g_sKeyboardDevice,
+                                        1,
+                                        0,
+                                        HIDCodes[i],
+                                        true) != KEYB_SUCCESS)
+        {
+            return;
+        }
+
+        //
+        // Wait until the key press message has been sent.
+        //
+        if (!WaitForSendIdle(MAX_SEND_DELAY))
+        {
+            g_bConnected = 0;
+            return;
+        }
+    }
+
+    for (uint8_t i = 0; i < numKeys; i++)
+    {
+        //
+        // Send the key release message.
+        //
+        g_eKeyboardState = STATE_SENDING;
+        if (USBDHIDKeyboardKeyStateChange((void *)&g_sKeyboardDevice,
+                                        1, 0, HIDCodes[i],
+                                        false) != KEYB_SUCCESS)
+        {
+            return;
+        }
+
+        //
+        // Wait until the key release message has been sent.
+        //
+        if (!WaitForSendIdle(MAX_SEND_DELAY))
+        {
+            g_bConnected = 0;
+            return;
+        }
+    }
+}
+
 void Macro_Execute(Macro macro)
 {
     // TODO send keyboard combination to computer through USB
     SendMediaKey(macro.asciiCodes[0]);
+    SendKeys(macro.asciiCodes, macro.numKeys);
 }

@@ -21,7 +21,7 @@
  * 2 - Macro.c Test
  * 3 - Keyboard Test
  */
-#define __MAIN__ 0
+#define __MAIN__ 1
 
 // uint32_t KeyboardHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgData, void *pvMsgData)
 // {

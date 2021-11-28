@@ -7,6 +7,7 @@ typedef struct Macro
 {
     char name[4];
     uint8_t asciiCodes[MAX_KEY_COMBO_COUNT];
+    uint8_t numKeys;
 } Macro;
 
 extern Macro Macro_Keybindings[ROW_COUNT][COLUMN_COUNT];
