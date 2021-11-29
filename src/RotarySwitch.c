@@ -10,9 +10,9 @@
 #include "Macro.h"
 #include "RotarySwitch.h"
 
-static const Macro VOLUME_UP = {"V+", {2}};
-static const Macro VOLUME_DOWN = {"V-", {4}};
-static const Macro VOLUME_MUTE = {"VM", {1}};
+static const Macro VOLUME_UP = {"V+", {2}, 1};
+static const Macro VOLUME_DOWN = {"V-", {4}, 1};
+static const Macro VOLUME_MUTE = {"VM", {1}, 1};
 
 /**
  * Arm interrupts for PF2-PF0.

@@ -7,6 +7,7 @@
 #include <string.h>
 
 #include "Macro.h"
+#include "RotarySwitch.h"
 
 #include "../inc/diskio.h"
 #include "../inc/ff.h"
@@ -337,96 +338,6 @@ void Macro_Init(void)
     bLastSuspend = false;
 }
 
-void SendKey(uint8_t HIDCode)
-{
-    //
-    // Send the key press message.
-    //
-    g_eKeyboardState = STATE_SENDING;
-    if (USBDHIDKeyboardKeyStateChange((void *)&g_sKeyboardDevice,
-                                      1,
-                                      0,
-                                      HIDCode,
-                                      true) != KEYB_SUCCESS)
-    {
-        return;
-    }
-
-    //
-    // Wait until the key press message has been sent.
-    //
-    if (!WaitForSendIdle(MAX_SEND_DELAY))
-    {
-        g_bConnected = 0;
-        return;
-    }
-
-    //
-    // Send the key release message.
-    //
-    g_eKeyboardState = STATE_SENDING;
-    if (USBDHIDKeyboardKeyStateChange((void *)&g_sKeyboardDevice,
-                                      1, 0, HIDCode,
-                                      false) != KEYB_SUCCESS)
-    {
-        return;
-    }
-
-    //
-    // Wait until the key release message has been sent.
-    //
-    if (!WaitForSendIdle(MAX_SEND_DELAY))
-    {
-        g_bConnected = 0;
-        return;
-    }
-}
-
-void SendMediaKey(uint8_t HIDCode)
-{
-    //
-    // Send the key press message.
-    //
-    g_eKeyboardState = STATE_SENDING;
-    if (USBDHIDKeyboardKeyStateChange((void *)&g_sKeyboardDevice,
-                                      2,
-                                      0,
-                                      HIDCode,
-                                      true) != KEYB_SUCCESS)
-    {
-        return;
-    }
-
-    //
-    // Wait until the key press message has been sent.
-    //
-    if (!WaitForSendIdle(MAX_SEND_DELAY))
-    {
-        g_bConnected = 0;
-        return;
-    }
-
-    //
-    // Send the key release message.
-    //
-    g_eKeyboardState = STATE_SENDING;
-    if (USBDHIDKeyboardKeyStateChange((void *)&g_sKeyboardDevice,
-                                      2, 0, HIDCode,
-                                      false) != KEYB_SUCCESS)
-    {
-        return;
-    }
-
-    //
-    // Wait until the key release message has been sent.
-    //
-    if (!WaitForSendIdle(MAX_SEND_DELAY))
-    {
-        g_bConnected = 0;
-        return;
-    }
-}
-
 void SendKeys(uint8_t *HIDCodes, uint8_t numKeys)
 {
     for (uint8_t i = 0; i < numKeys; i++)
@@ -478,9 +389,59 @@ void SendKeys(uint8_t *HIDCodes, uint8_t numKeys)
     }
 }
 
+void SendMediaKey(uint8_t HIDCode)
+{
+    //
+    // Send the key press message.
+    //
+    g_eKeyboardState = STATE_SENDING;
+    if (USBDHIDKeyboardKeyStateChange((void *)&g_sKeyboardDevice,
+                                      2,
+                                      0,
+                                      HIDCode,
+                                      true) != KEYB_SUCCESS)
+    {
+        return;
+    }
+
+    //
+    // Wait until the key press message has been sent.
+    //
+    if (!WaitForSendIdle(MAX_SEND_DELAY))
+    {
+        g_bConnected = 0;
+        return;
+    }
+
+    //
+    // Send the key release message.
+    //
+    g_eKeyboardState = STATE_SENDING;
+    if (USBDHIDKeyboardKeyStateChange((void *)&g_sKeyboardDevice,
+                                      2, 0, HIDCode,
+                                      false) != KEYB_SUCCESS)
+    {
+        return;
+    }
+
+    //
+    // Wait until the key release message has been sent.
+    //
+    if (!WaitForSendIdle(MAX_SEND_DELAY))
+    {
+        g_bConnected = 0;
+        return;
+    }
+}
+
 void Macro_Execute(Macro macro)
 {
-    // TODO send keyboard combination to computer through USB
-    SendMediaKey(macro.asciiCodes[0]);
-    SendKeys(macro.asciiCodes, macro.numKeys);
+    if (strcmp(macro.name, "V+") == 0 || strcmp(macro.name, "V-") == 0 || strcmp(macro.name, "VM") == 0)
+    {
+        SendMediaKey(macro.asciiCodes[0]);
+    }
+    else
+    {
+        SendKeys(macro.asciiCodes, macro.numKeys);
+    }
 }
