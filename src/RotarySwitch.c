@@ -50,7 +50,7 @@ static void Timer1A_Arm(uint32_t period)
  */
 static void HandleClockwise()
 {
-    Macro_Execute(VOLUME_UP);
+    Macro_Execute(VOLUME_UP, true);
 }
 
 /**
@@ -58,7 +58,7 @@ static void HandleClockwise()
  */
 static void HandleCounterClockwise()
 {
-    Macro_Execute(VOLUME_DOWN);
+    Macro_Execute(VOLUME_DOWN, true);
 }
 
 /**
@@ -66,7 +66,7 @@ static void HandleCounterClockwise()
  */
 static void HandlePush()
 {
-    Macro_Execute(VOLUME_MUTE);
+    Macro_Execute(VOLUME_MUTE, true);
 }
 
 /** 

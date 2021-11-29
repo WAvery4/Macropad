@@ -434,9 +434,9 @@ void SendMediaKey(uint8_t HIDCode)
     }
 }
 
-void Macro_Execute(Macro macro)
+void Macro_Execute(Macro macro, bool isMedia)
 {
-    if (strcmp(macro.name, "V+") == 0 || strcmp(macro.name, "V-") == 0 || strcmp(macro.name, "VM") == 0)
+    if (isMedia)
     {
         SendMediaKey(macro.asciiCodes[0]);
     }

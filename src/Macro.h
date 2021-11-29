@@ -22,4 +22,4 @@ void Macro_Init(void);
  * 
  * @param macro the macro to send through USB
  */
-void Macro_Execute(Macro macro);
+void Macro_Execute(Macro macro, bool isMedia);

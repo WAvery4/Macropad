@@ -1,6 +1,7 @@
 #define PORT_B_PRIORITY 5
 #define TIMER0A_PRIORITY 3
 
+#include <stdbool.h>
 #include <stdint.h>
 #include "../inc/tm4c123gh6pm.h"
 #include "Macro.h"
@@ -104,7 +105,7 @@ void GPIOPortB_Handler(void)
             // Handle switch press
             Macro selectedMacro = Macro_Keybindings[i][ColumnIndex];
 
-            Macro_Execute(selectedMacro);
+            Macro_Execute(selectedMacro, false);
         }
     }
 
