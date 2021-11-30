@@ -83,7 +83,7 @@ void GPIOPortF_Handler(void)
     if (triggeredPortF == 0x01)
     {
         // Handle push
-        GPIO_PORTF_IM_R &= ~0x06; // disarm interrupt on PF1-2
+        GPIO_PORTF_IM_R &= ~0x07; // disarm interrupt on PF1-2
 
         HandlePush();
         Timer1A_Arm(800000);
@@ -119,7 +119,7 @@ void GPIOPortF_Handler(void)
         prevSigB = sigB;
     }
 
-    GPIO_PORTF_ICR_R = 0x06;
+    GPIO_PORTF_ICR_R = 0x07;
 }
 
 /**

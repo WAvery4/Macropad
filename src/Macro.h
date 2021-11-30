@@ -1,6 +1,7 @@
 #define MAX_KEY_COMBO_COUNT 5
 
 #include <stdint.h>
+#include <stdbool.h>
 #include "SwitchMatrix.h"
 
 typedef struct Macro

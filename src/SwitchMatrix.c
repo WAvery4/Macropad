@@ -1,9 +1,10 @@
-#define PORT_B_PRIORITY 5
+#define PORT_B_PRIORITY 2
 #define TIMER0A_PRIORITY 3
 
 #include <stdbool.h>
 #include <stdint.h>
 #include "../inc/tm4c123gh6pm.h"
+#include "../inc/Timer2A.h"
 #include "Macro.h"
 #include "SwitchMatrix.h"
 
@@ -103,13 +104,13 @@ void GPIOPortB_Handler(void)
         if (triggeredPortB >> i == 1)
         {
             // Handle switch press
-            Macro selectedMacro = Macro_Keybindings[i][ColumnIndex];
+            Macro selectedMacro = Macro_Keybindings[ROW_COUNT-1-i][ColumnIndex];
 
             Macro_Execute(selectedMacro, false);
         }
     }
 
-    Timer0A_Arm(800000);
+    Timer0A_Arm(8000000);
 }
 
 /**
@@ -124,16 +125,13 @@ void Timer0A_Handler(void)
 
 void SwitchMatrix_Init(void)
 {
+    Timer2A_Init(SwitchMatrix_CycleColumnOutput, 800000, 1);
     InitRows();
     InitColumns();
-    // Macro_Init();
 }
 
 void SwitchMatrix_CycleColumnOutput(void)
 {
-    long sr = StartCritical();
     ColumnIndex = (ColumnIndex + 1) % COLUMN_COUNT;
     PC7654 = 1 << (ColumnIndex + COLUMN_COUNT);
-
-    EndCritical(sr);
 }

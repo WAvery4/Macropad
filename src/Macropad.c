@@ -21,7 +21,7 @@
  * 2 - Macro.c Test
  * 3 - Keyboard Test
  */
-#define __MAIN__ 1
+#define __MAIN__ 0
 
 // uint32_t KeyboardHandler(void *pvCBData, uint32_t ui32Event, uint32_t ui32MsgData, void *pvMsgData)
 // {
@@ -31,8 +31,10 @@
 #if __MAIN__ == 0
 int main(void)
 {
-    PLL_Init(Bus50MHz);
+    PLL_Init(Bus80MHz);
     DisableInterrupts();
+    ST7735_InitR(INITR_REDTAB);
+    ST7735_FillScreen(0); // set screen to black
     SwitchMatrix_Init();
     RotarySwitch_Init();
     EnableInterrupts();
@@ -40,7 +42,7 @@ int main(void)
 
     while (1)
     {
-        SwitchMatrix_CycleColumnOutput();
+        // SwitchMatrix_CycleColumnOutput();
     }
 }
 
