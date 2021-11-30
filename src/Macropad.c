@@ -40,10 +40,7 @@ int main(void)
     EnableInterrupts();
     Macro_Init();
 
-    while (1)
-    {
-        // SwitchMatrix_CycleColumnOutput();
-    }
+    while (1) {}
 }
 
 #elif __MAIN__ == 1

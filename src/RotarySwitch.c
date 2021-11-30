@@ -10,9 +10,9 @@
 #include "Macro.h"
 #include "RotarySwitch.h"
 
-static const Macro VOLUME_UP = {"V+", {2}, 1};
-static const Macro VOLUME_DOWN = {"V-", {4}, 1};
-static const Macro VOLUME_MUTE = {"VM", {1}, 1};
+static const Macro VOLUME_UP = {"V+", {0}, {2}, 1};
+static const Macro VOLUME_DOWN = {"V-", {0}, {4}, 1};
+static const Macro VOLUME_MUTE = {"VM", {0}, {1}, 1};
 
 /**
  * Arm interrupts for PF2-PF0.
@@ -77,10 +77,10 @@ static void HandlePush()
 void GPIOPortF_Handler(void)
 {
     static uint8_t prevSigA, prevSigB;
-    uint8_t sigA = (PF1 >> 1), sigB = (PF2 >> 2);
+    uint8_t sigA = (PF0), sigB = (PF1 >> 1);
     uint32_t triggeredPortF = GPIO_PORTF_RIS_R & 0x07;
 
-    if (triggeredPortF == 0x01)
+    if (triggeredPortF == 0x04)
     {
         // Handle push
         GPIO_PORTF_IM_R &= ~0x07; // disarm interrupt on PF1-2
@@ -96,22 +96,22 @@ void GPIOPortF_Handler(void)
             {
                 if (prevSigA == 0)
                 {
-                    HandleClockwise();
+                    HandleCounterClockwise();
                 }
                 else
                 {
-                    HandleCounterClockwise();
+                    HandleClockwise();
                 }
             }
             else
             {
                 if (prevSigA == 0)
                 {
-                    HandleCounterClockwise();
+                    HandleClockwise();
                 }
                 else
                 {
-                    HandleClockwise();
+                    HandleCounterClockwise();
                 }
             }
         }
@@ -142,6 +142,7 @@ void RotarySwitch_Init(void)
     }
 
     GPIO_PORTF_LOCK_R = 0x4C4F434B;   // Unlock GPIO for port F
+    GPIO_PORTF_CR_R = 0x07;           // allow changes to PF4-0
     GPIO_PORTF_DIR_R &= ~0x07;        // Set as input
     GPIO_PORTF_AFSEL_R &= ~0x07;      // Disable alternate function
     GPIO_PORTF_DEN_R |= 0x07;         // Enable digital I/O
