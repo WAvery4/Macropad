@@ -308,6 +308,11 @@ bool WaitForSendIdle(uint_fast32_t ui32TimeoutTicks)
  *        - Line Format: MACRO_NAME NUM_KEYS KEYS
  *        - MACRO_NAME: 3 characters long
  *        - NUM_KEYS: [1,5] (integer)
+ *        - MODS: [1,5] (characters)
+ *              - ^ == CTRL
+ *              - A == ALT
+ *              - S == SHIFT
+ *              - 0 == NO MODIFIER
  *        - KEYS: [1,5] (characters)
  */
 void Macro_Init(void)
@@ -358,6 +363,14 @@ void Macro_Init(void)
                 // read extra space character
                 Fresult = f_read(&Handle, &ch, 1, &successfulReads);
                 x -= 6; // add space between macro name and macro keys
+                
+                for (int k = 0; k < numKeys; k++) {
+                    Fresult = f_read(&Handle, &ch, 1, &successfulReads);
+                    Macro_Keybindings[i][j].modifiers[k] = ch;
+                }
+                
+                // read extra space character
+                Fresult = f_read(&Handle, &ch, 1, &successfulReads);
 
                 for (int k = 0; k < numKeys; k++)
                 {
@@ -442,18 +455,25 @@ void Macro_Init(void)
     bLastSuspend = false;
 }
 
-void SendKeys(uint8_t *HIDCodes, uint8_t numKeys)
+void SendKeys(Macro macro)
 {
-    for (uint8_t i = 0; i < numKeys; i++)
+    for (uint8_t i = 0; i < macro.numKeys; i++)
     {
-        uint32_t keyIdx = HIDCodes[i] - ' ';
+        uint32_t keyIdx = macro.asciiCodes[i] - ' ';
+        uint8_t modifiers = g_ppi8KeyUsageCodes[keyIdx][1];
+        if (macro.modifiers[i] == '^')
+            modifiers = HID_KEYB_LEFT_CTRL;
+        else if (macro.modifiers[i] == 'A' )
+            modifiers = HID_KEYB_LEFT_ALT;
+        else if (macro.modifiers[i] == 'S')
+            modifiers = HID_KEYB_LEFT_SHIFT;
         //
         // Send the key press message.
         //
         g_eKeyboardState = STATE_SENDING;
         if (USBDHIDKeyboardKeyStateChange((void *)&g_sKeyboardDevice,
                                         1,
-                                        g_ppi8KeyUsageCodes[keyIdx][0],
+                                        modifiers,
                                         g_ppi8KeyUsageCodes[keyIdx][1],
                                         true) != KEYB_SUCCESS)
         {
@@ -470,9 +490,9 @@ void SendKeys(uint8_t *HIDCodes, uint8_t numKeys)
         }
     }
 
-    for (uint8_t i = 0; i < numKeys; i++)
+    for (uint8_t i = 0; i < macro.numKeys; i++)
     {
-        uint32_t keyIdx = HIDCodes[i] - ' ';
+        uint32_t keyIdx = macro.asciiCodes[i] - ' ';
         //
         // Send the key release message.
         //
@@ -550,6 +570,6 @@ void Macro_Execute(Macro macro, bool isMedia)
     }
     else
     {
-        SendKeys(macro.asciiCodes, macro.numKeys);
+        SendKeys(macro);
     }
 }
