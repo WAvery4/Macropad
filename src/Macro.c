@@ -460,7 +460,7 @@ void SendKeys(Macro macro)
     for (uint8_t i = 0; i < macro.numKeys; i++)
     {
         uint32_t keyIdx = macro.asciiCodes[i] - ' ';
-        uint8_t modifiers = g_ppi8KeyUsageCodes[keyIdx][1];
+        uint8_t modifiers = g_ppi8KeyUsageCodes[keyIdx][0];
         if (macro.modifiers[i] == '^')
             modifiers = HID_KEYB_LEFT_CTRL;
         else if (macro.modifiers[i] == 'A' )
